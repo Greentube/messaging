@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace Messaging
 {
@@ -10,10 +11,11 @@ namespace Messaging
         /// <summary>
         /// Publishes a message of type <typeparam name="TMessage"></typeparam>
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">The message to be published</param>
+        /// <param name="token">A cancellation token</param>
         /// <typeparam name="TMessage"></typeparam>
         /// <returns></returns>
-        Task Publish<TMessage>(TMessage message);
+        Task Publish<TMessage>(TMessage message, CancellationToken token);
     }
 
 }

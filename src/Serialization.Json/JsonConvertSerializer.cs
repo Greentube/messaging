@@ -2,7 +2,7 @@
 using System.Text;
 using Newtonsoft.Json;
 
-namespace Serialization.Protobuf
+namespace Serialization.Json
 {
     public class JsonConvertSerializer : ISerializer
     {

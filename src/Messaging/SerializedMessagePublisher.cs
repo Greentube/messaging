@@ -1,19 +1,20 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Serialization;
 
 namespace Messaging
 {
     /// <summary>
-    /// Publishes a deserialized message via raw publisher
+    /// Publishes a serialized message via raw publisher
     /// </summary>
-    public class DeserializedMessagePublisher : IMessagePublisher
+    public class SerializedMessagePublisher : IMessagePublisher
     {
         private readonly IMessageTypeTopicMap _typeTopicMap;
         private readonly IRawMessagePublisher _rawMessagePublisher;
         private readonly ISerializer _serializer;
 
-        public DeserializedMessagePublisher(
+        public SerializedMessagePublisher(
             IMessageTypeTopicMap typeTopicMap,
             ISerializer serializer,
             IRawMessagePublisher rawMessagePublisher)
@@ -23,7 +24,7 @@ namespace Messaging
             _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         }
 
-        public Task Publish<TMessage>(TMessage message)
+        public Task Publish<TMessage>(TMessage message, CancellationToken token)
         {
             var topic = _typeTopicMap.Get(message.GetType());
             if (topic == null)
@@ -39,7 +40,7 @@ namespace Messaging
                     $"Serializer {serialized.GetType()} returned null for message of type {message.GetType()}.");
             }
 
-            return _rawMessagePublisher.Publish(topic, serialized);
+            return _rawMessagePublisher.Publish(topic, serialized, token);
         }
     }
 }

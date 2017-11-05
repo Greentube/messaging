@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace Messaging
 {
@@ -11,9 +12,10 @@ namespace Messaging
         /// <summary>
         /// Handles <typeparam name="TMessage"></typeparam>
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">The message to be handled</param>
+        /// <param name="token">A cancellation token</param>
         /// <returns></returns>
-        Task Handle(TMessage message);
+        Task Handle(TMessage message, CancellationToken token);
     }
 
     /// <summary>
