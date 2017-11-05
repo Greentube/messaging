@@ -46,7 +46,7 @@ public class SomeMessageController
     [HttpPut]
     public async Task<IActionResult> PublishSomeMessage([FromBody] SomeMessage message, CancellationToken token)
     {
-        await _publisher.Publish(message);
+        await _publisher.Publish(message, token);
         return Accepted();
     }
 }
