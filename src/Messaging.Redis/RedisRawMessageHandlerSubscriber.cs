@@ -10,10 +10,8 @@ namespace Messaging.Redis
     {
         private readonly IConnectionMultiplexer _mux;
 
-        public RedisRawMessageHandlerSubscriber(IConnectionMultiplexer mux)
-        {
+        public RedisRawMessageHandlerSubscriber(IConnectionMultiplexer mux) =>
             _mux = mux ?? throw new ArgumentNullException(nameof(mux));
-        }
 
         public Task Subscribe(string topic, IRawMessageHandler rawHandler, CancellationToken _)
         {

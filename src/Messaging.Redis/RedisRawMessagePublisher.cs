@@ -9,11 +9,8 @@ namespace Messaging.Redis
     {
         private readonly ISubscriber _subscriber;
 
-        public RedisRawMessagePublisher(IConnectionMultiplexer mux)
-        {
-            if (mux == null) throw new ArgumentNullException(nameof(mux));
-            _subscriber = mux.GetSubscriber() ?? throw new ArgumentException(nameof(mux), "Not subscription received.");
-        }
+        public RedisRawMessagePublisher(IConnectionMultiplexer mux) =>
+            _subscriber = mux?.GetSubscriber() ?? throw new ArgumentException(nameof(mux), "No subscription available.");
 
         public Task Publish(string topic, byte[] message, CancellationToken _)
         {
