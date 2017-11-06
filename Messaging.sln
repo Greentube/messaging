@@ -19,6 +19,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{4E92BA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Sample.Redis", "sample\Messaging.Sample.Redis\Messaging.Sample.Redis.csproj", "{B39705C8-9935-4C92-A263-384CBCF02A07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Serialization.Protobuf", "src\Messaging.DependencyInjection.Serialization.Protobuf\Messaging.DependencyInjection.Serialization.Protobuf.csproj", "{4A3E9B29-7E05-4FAB-8119-30A02A11F2FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Serialization.Json", "src\Messaging.DependencyInjection.Serialization.Json\Messaging.DependencyInjection.Serialization.Json.csproj", "{762CA555-B41D-4D5C-8F37-E377F2F09350}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Redis", "src\Messaging.DependencyInjection.Redis\Messaging.DependencyInjection.Redis.csproj", "{EA53999C-7D07-40DF-9856-FD1F1678608A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.All", "src\Messaging.All\Messaging.All.csproj", "{8DB7B4D7-C8B9-456C-84FD-E587179587D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection", "src\Messaging.DependencyInjection\Messaging.DependencyInjection.csproj", "{52726801-8081-4301-9A61-921F9805A849}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +59,26 @@ Global
 		{B39705C8-9935-4C92-A263-384CBCF02A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39705C8-9935-4C92-A263-384CBCF02A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39705C8-9935-4C92-A263-384CBCF02A07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A3E9B29-7E05-4FAB-8119-30A02A11F2FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A3E9B29-7E05-4FAB-8119-30A02A11F2FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A3E9B29-7E05-4FAB-8119-30A02A11F2FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A3E9B29-7E05-4FAB-8119-30A02A11F2FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{762CA555-B41D-4D5C-8F37-E377F2F09350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{762CA555-B41D-4D5C-8F37-E377F2F09350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{762CA555-B41D-4D5C-8F37-E377F2F09350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{762CA555-B41D-4D5C-8F37-E377F2F09350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA53999C-7D07-40DF-9856-FD1F1678608A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA53999C-7D07-40DF-9856-FD1F1678608A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA53999C-7D07-40DF-9856-FD1F1678608A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA53999C-7D07-40DF-9856-FD1F1678608A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DB7B4D7-C8B9-456C-84FD-E587179587D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DB7B4D7-C8B9-456C-84FD-E587179587D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DB7B4D7-C8B9-456C-84FD-E587179587D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DB7B4D7-C8B9-456C-84FD-E587179587D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52726801-8081-4301-9A61-921F9805A849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52726801-8081-4301-9A61-921F9805A849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52726801-8081-4301-9A61-921F9805A849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52726801-8081-4301-9A61-921F9805A849}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,5 +90,10 @@ Global
 		{87AE904D-349B-4DDA-9BA2-4DF53B537997} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{ADB04CF3-B489-4312-B906-2E8D955982CD} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{B39705C8-9935-4C92-A263-384CBCF02A07} = {4E92BAA4-3800-4290-BB6E-752437B37031}
+		{4A3E9B29-7E05-4FAB-8119-30A02A11F2FE} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
+		{762CA555-B41D-4D5C-8F37-E377F2F09350} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
+		{EA53999C-7D07-40DF-9856-FD1F1678608A} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
+		{8DB7B4D7-C8B9-456C-84FD-E587179587D3} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
+		{52726801-8081-4301-9A61-921F9805A849} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 	EndGlobalSection
 EndGlobal
