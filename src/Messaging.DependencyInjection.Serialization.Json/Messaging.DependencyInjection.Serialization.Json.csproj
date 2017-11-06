@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\Messaging.DependencyInjection\Messaging.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Serialization.Json\Serialization.Json.csproj" />
+  </ItemGroup>
 </Project>

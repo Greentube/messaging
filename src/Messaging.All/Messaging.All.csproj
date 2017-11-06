@@ -5,6 +5,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Messaging\Messaging.csproj" />
     <ProjectReference Include="..\Messaging.Redis\Messaging.Redis.csproj" />
+    <ProjectReference Include="..\Messaging.DependencyInjection\Messaging.DependencyInjection.csproj" />
     <ProjectReference Include="..\Messaging.DependencyInjection.Redis\Messaging.DependencyInjection.Redis.csproj" />
     <ProjectReference Include="..\Serialization\Serialization.csproj" />
     <ProjectReference Include="..\Serialization.Json\Serialization.Json.csproj" />

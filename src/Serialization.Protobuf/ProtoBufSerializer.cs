@@ -1,15 +1,24 @@
 ﻿using System;
 using System.IO;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Serialization.Protobuf
 {
-    public class ProtobufSerializer : ISerializer
+    public class ProtoBufSerializer : ISerializer
     {
+        private readonly ProtoBufOptions _options;
+
+        public ProtoBufSerializer(IOptions<ProtoBufOptions> options)
+        {
+            _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
+        }
+
         public byte[] Serialize<T>(T @object)
         {
             using (var stream = new MemoryStream())
             {
-                ProtoBuf.Serializer.Serialize(stream, @object);
+                _options.RuntimeTypeModel.Serialize(stream, @object);
                 return stream.ToArray();
             }
         }
@@ -20,7 +29,7 @@ namespace Serialization.Protobuf
             {
                 stream.Write(bytes, 0, bytes.Length);
                 stream.Position = 0;
-                return ProtoBuf.Serializer.Deserialize<T>(stream);
+                return (T)_options.RuntimeTypeModel.Deserialize(stream, null, typeof(T));
             }
         }
 
@@ -30,7 +39,7 @@ namespace Serialization.Protobuf
             {
                 stream.Write(bytes, 0, bytes.Length);
                 stream.Position = 0;
-                return ProtoBuf.Serializer.Deserialize(type, stream);
+                return _options.RuntimeTypeModel.Deserialize(stream, null, type);
             }
         }
     }

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Messaging.Redis;
 using Microsoft.Extensions.DependencyInjection;
 using ProtoBuf.Meta;
-using Serialization;
-using Serialization.Protobuf;
 using StackExchange.Redis;
 using static System.Threading.CancellationToken;
 
@@ -34,20 +31,15 @@ namespace Messaging.Sample.Redis
             // ConfigureServices()
             var services = new ServiceCollection();
 
-            // services.AddMessaging(options =>);
-            services.AddSingleton<IMessagePublisher, SerializedMessagePublisher>();
-            services.AddSingleton(_ => new MessageHandlerAssemblies {typeof(Program).Assembly});
-            services.AddSingleton<IRawMessageHandler, DispatchingRawMessageHandler>();
-            services.AddSingleton<IMessageHandlerInvoker>(c =>
-                new MessageHandlerInvoker(
-                    c.GetService<IMessageHandlerInfoProvider>(),
-                    c.GetService));
-
-            services.AddSingleton(new MessageHandlerDiscoveryOptions
+            services.AddMessaging(builder =>
             {
-                MessageHandlerAssemblies = {typeof(Program).Assembly},
-                IncludeNonPubicHandlers = true
+                builder.AddProtoBuf();
+                builder.AddRedis();
+                builder.ConfigureOptions(o => { o.DiscoveryOptions.IncludeNonPubicHandlers = true; });
             });
+
+            // Adds proto definition to the type (another option is to add [ProtoContract] to the class directly)
+            RuntimeTypeModel.Default.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
 
             // options.MessageTypeTopicMap.Add(type,topic);
             // - auto discovery based on SomeMessage attributes?
@@ -60,16 +52,9 @@ namespace Messaging.Sample.Redis
             services.AddScoped<IMessageHandler<SomeMessage>, SomeMessageHandler>();
             services.AddScoped<SomeMessageHandler, SomeMessageHandler>();
 
-            // options.AddRedis();
             services.AddSingleton<IConnectionMultiplexer>(_ => ConnectionMultiplexer.Connect("localhost:6379"));
-            services.AddSingleton<IRawMessagePublisher, RedisRawMessagePublisher>();
-            services.AddSingleton<IRawMessageHandlerSubscriber, RedisRawMessageHandlerSubscriber>();
-            services.AddSingleton<IRawMessageHandler, DispatchingRawMessageHandler>();
-            services.AddSingleton<IMessageHandlerInfoProvider, MessageHandlerInfoProvider>();
 
-            // options.AddProtobuf();
-            RuntimeTypeModel.Default.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
-            services.AddSingleton<ISerializer, ProtobufSerializer>();
+            services.AddOptions();
 
             var container = services.BuildServiceProvider();
 

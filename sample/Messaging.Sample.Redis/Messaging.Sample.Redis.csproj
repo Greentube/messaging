@@ -6,4 +6,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Messaging.All\Messaging.All.csproj" />
   </ItemGroup>
+
 </Project>
