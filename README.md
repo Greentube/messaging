@@ -24,11 +24,12 @@ internal class SomeMessageHandler : IMessageHandler<SomeMessage>
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddSingleton<IMessageHandler<SomeMessage>, SomeMessageHandler>();
-    services.AddMessaging(o => 
+    services.AddMessaging(builder =>
     {
-        o.AddRedis();
-        o.AddProtobuf();
-        o.MessageTypeTopicMap.Add(typeof(SomeMessage), "SomeTopic");
+        builder.AddProtoBuf();
+        builder.AddRedis();
+        builder.ConfigureOptions(o => { o.DiscoveryOptions.IncludeNonPubicHandlers = true; });
+        builder.MessageTypeTopicMap.Add(typeof(SomeMessage), "SomeTopic");
     });
 }
 public void Configure(IApplicationBuilder app)
