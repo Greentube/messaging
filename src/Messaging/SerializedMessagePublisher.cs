@@ -37,7 +37,7 @@ namespace Messaging
             if (serialized == null)
             {
                 throw new InvalidOperationException(
-                    $"Serializer {serialized.GetType()} returned null for message of type {message.GetType()}.");
+                    $"Serializer {_serializer.GetType()} returned null for message of type {message.GetType()}.");
             }
 
             return _rawMessagePublisher.Publish(topic, serialized, token);
