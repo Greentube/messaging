@@ -8,7 +8,6 @@ namespace Messaging
     public class MessageHandlerInfoProvider : IMessageHandlerInfoProvider
     {
         private readonly MessageHandlerDiscoveryOptions _options;
-        private Dictionary<Type, (Type handlerType, MethodInfo handleMethod)> _messageToHandlerDictionary;
 
         public MessageHandlerInfoProvider(MessageHandlerDiscoveryOptions options)
         {
@@ -19,10 +18,11 @@ namespace Messaging
         {
             return from asm in _options.MessageHandlerAssemblies
                 from type in asm.GetTypes()
-                where type.IsClass
-                      && !type.IsAbstract
-                      && type.IsPublic || _options.IncludeNonPubicHandlers
-                from inf in type.GetInterfaces()
+                let typeInfo = type.GetTypeInfo()
+                where typeInfo.IsClass
+                      && !typeInfo.IsAbstract
+                      && typeInfo.IsPublic || _options.IncludeNonPubicHandlers
+                from inf in typeInfo.GetInterfaces().Select(t => t.GetTypeInfo())
                 where inf.IsGenericType
                       && inf.GetGenericTypeDefinition() == typeof(IMessageHandler<>)
                 let messageType = inf.GetGenericArguments().Single()
