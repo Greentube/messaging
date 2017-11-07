@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using ProtoBuf.Meta;
+using Serialization.Protobuf;
 using StackExchange.Redis;
 
 namespace Messaging.Sample.Redis

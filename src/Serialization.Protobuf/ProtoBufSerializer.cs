@@ -3,6 +3,7 @@ using System.IO;
 
 namespace Serialization.Protobuf
 {
+    /// <inheritdoc />
     public class ProtoBufSerializer : ISerializer
     {
         private readonly ProtoBufOptions _options;
@@ -12,6 +13,7 @@ namespace Serialization.Protobuf
             _options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
+        /// <inheritdoc />
         public byte[] Serialize<T>(T @object)
         {
             using (var stream = new MemoryStream())
@@ -21,16 +23,7 @@ namespace Serialization.Protobuf
             }
         }
 
-        public T Deserialize<T>(byte[] bytes)
-        {
-            using (var stream = new MemoryStream())
-            {
-                stream.Write(bytes, 0, bytes.Length);
-                stream.Position = 0;
-                return (T)_options.RuntimeTypeModel.Deserialize(stream, null, typeof(T));
-            }
-        }
-
+        /// <inheritdoc />
         public object Deserialize(Type type, byte[] bytes)
         {
             using (var stream = new MemoryStream())

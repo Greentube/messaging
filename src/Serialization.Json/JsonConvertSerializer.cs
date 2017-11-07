@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Serialization.Json
 {
+    /// <inheritdoc />
     public class JsonConvertSerializer : ISerializer
     {
         private readonly JsonOptions _options;
@@ -13,18 +14,14 @@ namespace Serialization.Json
             _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
         }
 
+        /// <inheritdoc />
         public byte[] Serialize<T>(T @object)
         {
             var @string = JsonConvert.SerializeObject(@object);
             return _options.Encoding.GetBytes(@string);
         }
 
-        public T Deserialize<T>(byte[] bytes)
-        {
-            var @string = _options.Encoding.GetString(bytes);
-            return JsonConvert.DeserializeObject<T>(@string);
-        }
-
+        /// <inheritdoc />
         public object Deserialize(Type type, byte[] bytes)
         {
             var @string = _options.Encoding.GetString(bytes);
