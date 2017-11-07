@@ -14,13 +14,6 @@ namespace Serialization
         /// <typeparam name="T">The type of the object being serialized</typeparam>
         /// <returns>Serialized object</returns>
         byte[] Serialize<T>(T @object);
-        /// <summary>
-        /// Deserializes the byte array into an instance of T
-        /// </summary>
-        /// <param name="bytes">The data to deserialize</param>
-        /// <typeparam name="T">The type to instantiate</typeparam>
-        /// <returns>The deserialized object</returns>
-        T Deserialize<T>(byte[] bytes);
 
         /// <summary>
         /// Deserializes the byte array into an instance of an object

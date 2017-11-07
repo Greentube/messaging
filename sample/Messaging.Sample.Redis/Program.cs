@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using ProtoBuf.Meta;
+using Serialization.Protobuf;
 using StackExchange.Redis;
 using static System.Threading.CancellationToken;
 
