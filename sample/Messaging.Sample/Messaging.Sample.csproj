@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Messaging.All\Messaging.All.csproj" />
+    <ProjectReference Include="..\..\src\Messaging\Messaging.csproj" />
+  </ItemGroup>
+</Project>

@@ -20,6 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // Add Messaging services
             services.TryAddSingleton<IMessagePublisher, SerializedMessagePublisher>();
             services.TryAddSingleton<IRawMessageHandler, DispatchingRawMessageHandler>();
+            services.TryAddSingleton<IMessageHandlerInfoProvider, MessageHandlerInfoProvider>();
             services.TryAddSingleton<IMessageHandlerInvoker>(c =>
                 new MessageHandlerInvoker(
                     c.GetService<IMessageHandlerInfoProvider>(),
