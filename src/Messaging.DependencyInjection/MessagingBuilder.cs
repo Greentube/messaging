@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Serialization;
 
 namespace Messaging.DependencyInjection

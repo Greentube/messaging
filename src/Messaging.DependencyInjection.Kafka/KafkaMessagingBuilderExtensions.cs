@@ -3,6 +3,7 @@ using Messaging;
 using Messaging.DependencyInjection;
 using Messaging.Kafka;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -19,6 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static MessagingBuilder AddKafka(this MessagingBuilder builder, Action<KafkaOptions> actionSetup)
         {
             builder.Services.Configure(actionSetup);
+            builder.Services.AddSingleton(c => c.GetRequiredService<IOptions<KafkaOptions>>().Value);
+
             return builder.AddKafka();
         }
     }

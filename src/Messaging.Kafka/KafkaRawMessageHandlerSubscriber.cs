@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 using Confluent.Kafka.Serialization;
-using Microsoft.Extensions.Options;
 
 namespace Messaging.Kafka
 {
@@ -17,9 +16,9 @@ namespace Messaging.Kafka
 
         private readonly KafkaOptions _options;
 
-        public KafkaRawMessageHandlerSubscriber(IOptions<KafkaOptions> options)
+        public KafkaRawMessageHandlerSubscriber(KafkaOptions options)
         {
-            _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
+            _options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         public Task Subscribe(string topic, IRawMessageHandler rawHandler, CancellationToken _)
@@ -30,7 +29,7 @@ namespace Messaging.Kafka
                 var consumerCancellation = new CancellationTokenSource();
 
                 var consumer = new Consumer<Null, byte[]>(_options, null, new ByteArrayDeserializer());
-                
+
                 // A task per topic for now
                 var consumerTask = Task.Run(() =>
                 {

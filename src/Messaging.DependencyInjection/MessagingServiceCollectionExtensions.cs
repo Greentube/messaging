@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.TryAddEnumerable(
                 ServiceDescriptor.Transient<IConfigureOptions<MessagingOptions>, DefaultMessagingOptionsSetup>());
+            services.AddSingleton(c => c.GetRequiredService<IOptions<MessagingOptions>>().Value);
 
             // Add Messaging services
             services.TryAddSingleton<IMessagePublisher, SerializedMessagePublisher>();

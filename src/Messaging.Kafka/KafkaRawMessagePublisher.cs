@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 using Confluent.Kafka.Serialization;
-using Microsoft.Extensions.Options;
 
 namespace Messaging.Kafka
 {
@@ -11,10 +10,10 @@ namespace Messaging.Kafka
     {
         private readonly Producer<Null, byte[]> _producer;
 
-        public KafkaRawMessagePublisher(IOptions<KafkaOptions> options)
+        public KafkaRawMessagePublisher(KafkaOptions options)
         {
-            if (options?.Value == null) throw new ArgumentNullException(nameof(options));
-            _producer = new Producer<Null, byte[]>(options.Value, null, new ByteArraySerializer());
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            _producer = new Producer<Null, byte[]>(options, null, new ByteArraySerializer());
         }
 
         public Task Publish(string topic, byte[] message, CancellationToken token)

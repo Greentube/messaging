@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Extensions.Options;
 
 namespace Messaging
 {
@@ -10,10 +9,10 @@ namespace Messaging
     {
         private readonly MessageHandlerDiscoveryOptions _discoveryOptions;
 
-        public MessageHandlerInfoProvider(IOptions<MessagingOptions> options)
+        public MessageHandlerInfoProvider(MessagingOptions options)
         {
-            if (options?.Value == null) throw new ArgumentNullException(nameof(options));
-            _discoveryOptions = options.Value.DiscoveryOptions;
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            _discoveryOptions = options.DiscoveryOptions;
 
             if (!_discoveryOptions?.MessageHandlerAssemblies?.Any() ?? false)
                 throw new ArgumentException(
