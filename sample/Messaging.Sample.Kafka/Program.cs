@@ -13,8 +13,13 @@ namespace Messaging.Sample.Kafka
                     builder.AddJson();
                     builder.AddKafka(o =>
                     {
-                        o.BrokerList = "localhost:9092";
-                        o.GroupId = "GroupId";
+                        o.Properties.BrokerList = "localhost:9092";
+                        o.Properties.GroupId = "Sample-GroupId";
+                        o.Properties.Add("socket.timeout.ms", 1000); // sample unmapped setting
+                        o.Subscriber.ConsumerCreatedCallback =
+                            consumer => consumer.OnError += (sender, error)
+                                => Console.WriteLine($"Consumer error: ${error}");
+
                     });
                     builder.ConfigureOptions(o =>
                     {
@@ -25,9 +30,6 @@ namespace Messaging.Sample.Kafka
             {
 
                 app.Run();
-
-                Console.ReadKey();
-
             } // Graceful shutdown
         }
     }

@@ -49,9 +49,12 @@ namespace Messaging.Sample
             var publisher = _serviceProvider.GetRequiredService<IMessagePublisher>();
 
             Console.WriteLine("Publishing 'SomeMessage'...");
-            publisher.Publish(new SomeMessage { Body = "Some message body." }, CancellationToken.None)
+            publisher.Publish(new SomeMessage { Body = $"{DateTime.Now} Some message body: {Guid.NewGuid()}" }, CancellationToken.None)
                 .GetAwaiter()
                 .GetResult();
+
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
         }
 
         public void Dispose()

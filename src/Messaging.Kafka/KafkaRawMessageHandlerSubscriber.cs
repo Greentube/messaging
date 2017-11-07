@@ -28,19 +28,21 @@ namespace Messaging.Kafka
             {
                 var consumerCancellation = new CancellationTokenSource();
 
-                var consumer = new Consumer<Null, byte[]>(_options, null, new ByteArrayDeserializer());
+                var consumer = new Consumer<Null, byte[]>(_options.Properties, null, new ByteArrayDeserializer());
+                _options.Subscriber.ConsumerCreatedCallback?.Invoke(consumer);
 
-                // A task per topic for now
+                // A task per topic for now - This should vary. Could be single worker thread or .. N
                 var consumerTask = Task.Run(() =>
                 {
                     try
                     {
                         consumer.Subscribe(topic);
+
                         subscriptionTask.SetResult(true); // Complete the subscription task
 
                         while (!consumerCancellation.IsCancellationRequested)
                         {
-                            if (consumer.Consume(out var msg, TimeSpan.FromSeconds(1)))
+                            if (consumer.Consume(out var msg, _options.Subscriber.ConsumeTimeout))
                             {
                                 rawHandler.Handle(msg.Topic, msg.Value, consumerCancellation.Token)
                                     .GetAwaiter()

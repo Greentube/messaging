@@ -14,14 +14,14 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = builder.Services;
             services.TryAddSingleton<IRawMessagePublisher, KafkaRawMessagePublisher>();
             services.TryAddSingleton<IRawMessageHandlerSubscriber, KafkaRawMessageHandlerSubscriber>();
+            builder.Services.AddSingleton(c => c.GetRequiredService<IOptions<KafkaOptions>>().Value);
+
             return builder;
         }
 
         public static MessagingBuilder AddKafka(this MessagingBuilder builder, Action<KafkaOptions> actionSetup)
         {
             builder.Services.Configure(actionSetup);
-            builder.Services.AddSingleton(c => c.GetRequiredService<IOptions<KafkaOptions>>().Value);
-
             return builder.AddKafka();
         }
     }

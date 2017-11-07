@@ -1,49 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using Confluent.Kafka;
 
 namespace Messaging.Kafka
 {
-    public class KafkaOptions : Dictionary<string, object>
+    public class KafkaOptions
     {
-        public string AutoOffset
-        {
-            get => (string)this["auto.offset.reset"];
-            set => this["auto.offset.reset"] = value;
-        }
+        /// <summary>
+        /// Kafka Properties
+        /// </summary>
+        /// <remarks>
+        /// <see href="https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md"/>
+        /// </remarks>
+        public KafkaProperties Properties { get; set; } = new KafkaProperties();
 
-        public int BatchSize
-        {
-            get => (int)this["batch.num.messages"];
-            set => this["batch.num.messages"] = value;
-        }
+        public SubscriberOptions Subscriber { get; set; } = new SubscriberOptions();
+        public PublisherOptions Publisher { get; set; } = new PublisherOptions();
 
-        public string BrokerList
+        public KafkaOptions()
         {
-            get => (string)this["bootstrap.servers"];
-            set => this["bootstrap.servers"] = value;
-        }
 
-        public string GroupId
-        {
-            get => (string)this["group.id"];
-            set => this["group.id"] = value;
-        }
-
-        public int QueueBufferSize
-        {
-            get => (int)this["queue.buffering.max.messages"];
-            set => this["queue.buffering.max.messages"] = value;
-        }
-
-        public int QueueBufferTime
-        {
-            get => (int)this["queue.buffering.max.ms"];
-            set => this["queue.buffering.max.ms"] = value;
-        }
-
-        public int FetchWaitTime
-        {
-            get => (int)this["fetch.wait.max.ms"];
-            set => this["fetch.wait.max.ms"] = value;
         }
     }
+
+    public class SubscriberOptions
+    {
+
+        /// <summary>
+        /// The maximum time to block.
+        /// You should typically use a relatively short timout period because this operation cannot be cancelled
+        /// </summary>
+        public TimeSpan ConsumeTimeout { get; set; } = TimeSpan.FromSeconds(3);
+        /// <summary>
+        /// Invoked when a Kafka Consumer is instantiated
+        /// </summary>
+        public Action<Consumer<Null, byte[]>> ConsumerCreatedCallback { get; set; }
+    }
+
+    public class PublisherOptions
+    {
+
+        /// <summary>
+        /// The maximum length of time to block.
+        /// You should typically use a relatively short timout period because this operation cannot be cancelled.
+        /// </summary>
+        public TimeSpan FlushTimeout { get; set; } = TimeSpan.FromSeconds(3);
+        /// <summary>
+        /// Invoked when a Kafka Producer is instantiated
+        /// </summary>
+        public Action<Producer<Null, byte[]>> ProducerCreatedCallback { get; set; }
+    }
+
 }

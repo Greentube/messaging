@@ -8,12 +8,14 @@ namespace Messaging.Kafka
 {
     public class KafkaRawMessagePublisher : IRawMessagePublisher, IDisposable
     {
+        private readonly KafkaOptions _options;
         private readonly Producer<Null, byte[]> _producer;
 
         public KafkaRawMessagePublisher(KafkaOptions options)
         {
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            _producer = new Producer<Null, byte[]>(options, null, new ByteArraySerializer());
+            _options = options ?? throw new ArgumentNullException(nameof(options));
+            _producer = new Producer<Null, byte[]>(options.Properties, null, new ByteArraySerializer());
+            _options.Publisher.ProducerCreatedCallback?.Invoke(_producer);
         }
 
         public Task Publish(string topic, byte[] message, CancellationToken token)
@@ -28,6 +30,7 @@ namespace Messaging.Kafka
 
         public void Dispose()
         {
+            _producer.Flush(_options.Publisher.FlushTimeout);
             _producer.Dispose();
         }
     }

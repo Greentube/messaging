@@ -9,7 +9,7 @@ namespace Messaging.Sample
     {
         public Task Handle(SomeMessage message, CancellationToken _)
         {
-            Console.WriteLine($"Handled: {message}.");
+            Console.WriteLine($"Handled: {message.Body}.");
             return Task.CompletedTask;
         }
     }

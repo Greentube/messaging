@@ -29,9 +29,6 @@ namespace Messaging.Sample.Redis
                 RuntimeTypeModel.Default.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
 
                 app.Run();
-
-                Console.ReadKey();
-
             } // Graceful shutdown
         }
     }

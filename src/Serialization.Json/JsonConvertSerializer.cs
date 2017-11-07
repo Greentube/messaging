@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace Serialization.Json
@@ -9,9 +8,9 @@ namespace Serialization.Json
     {
         private readonly JsonOptions _options;
 
-        public JsonConvertSerializer(IOptions<JsonOptions> options)
+        public JsonConvertSerializer(JsonOptions options)
         {
-            _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
+            _options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         /// <inheritdoc />
