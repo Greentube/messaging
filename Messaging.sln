@@ -34,6 +34,10 @@ ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization.Xml", "src\Serialization.Xml\Serialization.Xml.csproj", "{5192C8C3-F464-4827-9306-7F3E38B017E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Serialization.Xml", "src\Messaging.DependencyInjection.Serialization.Xml\Messaging.DependencyInjection.Serialization.Xml.csproj", "{3CA467FF-8947-44FD-BB4A-37570806AD14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +88,14 @@ Global
 		{52726801-8081-4301-9A61-921F9805A849}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52726801-8081-4301-9A61-921F9805A849}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52726801-8081-4301-9A61-921F9805A849}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5192C8C3-F464-4827-9306-7F3E38B017E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5192C8C3-F464-4827-9306-7F3E38B017E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5192C8C3-F464-4827-9306-7F3E38B017E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5192C8C3-F464-4827-9306-7F3E38B017E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CA467FF-8947-44FD-BB4A-37570806AD14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CA467FF-8947-44FD-BB4A-37570806AD14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CA467FF-8947-44FD-BB4A-37570806AD14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CA467FF-8947-44FD-BB4A-37570806AD14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,5 +112,7 @@ Global
 		{EA53999C-7D07-40DF-9856-FD1F1678608A} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{8DB7B4D7-C8B9-456C-84FD-E587179587D3} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{52726801-8081-4301-9A61-921F9805A849} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
+		{5192C8C3-F464-4827-9306-7F3E38B017E2} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
+		{3CA467FF-8947-44FD-BB4A-37570806AD14} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 	EndGlobalSection
 EndGlobal

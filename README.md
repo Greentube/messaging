@@ -1,7 +1,11 @@
 # messaging
-An opinionated messaging library for simple pub/sub with different serialization and middlewares.
+An opinionated messaging library for simple pub/sub with different serialization and message broker/middleware.
 
-## Publishing a message on an ASP.NET Core application
+To use this library, you need to decide on which [serialization](#Serialization) 
+and [messaging middleware](#messaging-middleware).
+
+
+### Publishing and Handling a message on an ASP.NET Core application
 ```csharp
 
 // Class without annotations
@@ -52,4 +56,62 @@ public class SomeMessageController
     }
 }
 
+```
+
+#### Messaging middleware
+The current supported messaging systems are:
+
+* [Redis](https://redis.io/topics/pubsub)
+
+
+#### Serialization
+The supported serialization methods are:
+
+* JSON - with Newtonsoft.Json
+* XML - with System.Xml.XmlSerializer
+* Protobuf - with protobuf-net
+
+Example serialization setup:
+
+```csharp
+services.AddMessaging(builder =>
+{
+    builder.AddProtoBuf();
+    // or
+    builder.AddXml();
+    // or
+    builder.AddJson();
+});
+```
+
+Each implementation has some additional settings
+
+##### JSON
+
+Define the encoding.
+
+```csharp
+// Use UTF-16 instead of the default UTF-8
+builder.AddJson(o => o.Encoding = Encoding.Unicode);
+```
+
+##### XML
+
+Xml with user-defined default namespace
+```csharp
+builder.AddXml(p => p.DefaultNamespace = "some-namespace");
+```
+Xml with user-defined factory delegate
+```csharp 
+// Root attribute will be named: 'messaging'
+builder.AddXml(p => p.Factory = type => new XmlSerializer(type, new XmlRootAttribute("messaging")));
+```
+
+##### Protobuf
+
+Custom RuntimeTypeModel
+```csharp
+var model = RuntimeTypeModel.Create();
+model.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
+builder.AddProtoBuf(o => o.RuntimeTypeModel = runtimeTypeModel);
 ```
