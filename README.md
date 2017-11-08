@@ -27,7 +27,6 @@ internal class SomeMessageHandler : IMessageHandler<SomeMessage>
 // Startup.cs
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddSingleton<IMessageHandler<SomeMessage>, SomeMessageHandler>();
     services.AddMessaging(builder =>
     {
         builder.AddProtoBuf();
