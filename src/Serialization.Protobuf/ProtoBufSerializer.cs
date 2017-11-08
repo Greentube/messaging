@@ -28,10 +28,8 @@ namespace Serialization.Protobuf
         /// <inheritdoc />
         public object Deserialize(Type type, byte[] bytes)
         {
-            using (var stream = new MemoryStream())
+            using (var stream = new MemoryStream(bytes))
             {
-                stream.Write(bytes, 0, bytes.Length);
-                stream.Position = 0;
                 return _options.RuntimeTypeModel.Deserialize(stream, null, type);
             }
         }
