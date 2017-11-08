@@ -5,6 +5,9 @@ using Serialization;
 
 namespace Messaging
 {
+    /// <summary>
+    /// Handles raw messages by deserializing them and dispatching with using <see cref="IMessageHandlerInvoker"/>
+    /// </summary>
     public class DispatchingRawMessageHandler : IRawMessageHandler
     {
         private readonly IMessageHandlerInvoker _messageHandlerInvoker;
@@ -21,6 +24,7 @@ namespace Messaging
             _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         }
 
+        ///<inheritdoc />
         public Task Handle(string topic, byte[] message, CancellationToken token)
         {
             if (topic == null) throw new ArgumentNullException(nameof(topic));

@@ -16,7 +16,7 @@ namespace Messaging
 
             if (!_discoveryOptions?.MessageHandlerAssemblies?.Any() ?? false)
                 throw new ArgumentException(
-                    $"{nameof(MessagingOptions)} have no available {nameof(MessageHandlerAssemblies)} defined.");
+                    $"{nameof(MessagingOptions)} has no available {nameof(MessageHandlerAssemblies)} defined.");
         }
 
         public IEnumerable<(Type messageType, Type handlerType, MethodInfo handleMethod)> GetHandlerInfo()

@@ -24,6 +24,7 @@ namespace Messaging
             _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         }
 
+        ///<inheritdoc />
         public Task Publish<TMessage>(TMessage message, CancellationToken token)
         {
             var topic = _typeTopicMap.Get(message.GetType());
