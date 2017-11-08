@@ -1,7 +1,7 @@
 # messaging
 An opinionated messaging library for simple pub/sub with different serialization and message broker/middleware.
 
-To use this library, you need to decide on which [serialization](#Serialization) 
+To use this library, you need to decide on which [serialization](#serialization) 
 and [messaging middleware](#messaging-middleware).
 
 
@@ -62,6 +62,7 @@ public class SomeMessageController
 The current supported messaging systems are:
 
 * [Redis](https://redis.io/topics/pubsub)
+* [Apache Kafka](https://kafka.apache.org/)
 
 
 #### Serialization
