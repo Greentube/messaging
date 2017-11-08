@@ -14,8 +14,6 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = builder.Services;
             services.TryAddSingleton<IRawMessagePublisher, RedisRawMessagePublisher>();
             services.TryAddSingleton<IRawMessageHandlerSubscriber, RedisRawMessageHandlerSubscriber>();
-            services.TryAddSingleton<IRawMessageHandler, DispatchingRawMessageHandler>();
-            services.TryAddSingleton<IMessageHandlerInfoProvider, MessageHandlerInfoProvider>();
             return builder;
         }
 

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 
 namespace Serialization.Protobuf
 {
@@ -10,9 +8,9 @@ namespace Serialization.Protobuf
     {
         private readonly ProtoBufOptions _options;
 
-        public ProtoBufSerializer(IOptions<ProtoBufOptions> options)
+        public ProtoBufSerializer(ProtoBufOptions options)
         {
-            _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
+            _options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
         /// <inheritdoc />

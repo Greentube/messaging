@@ -3,9 +3,9 @@
     <TargetFramework>netstandard1.5</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Serialization\Serialization.csproj" />
+    <PackageReference Include="Confluent.Kafka" Version="0.11.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
+    <ProjectReference Include="..\Messaging\Messaging.csproj" />
   </ItemGroup>
 </Project>

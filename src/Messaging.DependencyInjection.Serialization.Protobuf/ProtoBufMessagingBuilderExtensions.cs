@@ -1,5 +1,6 @@
 ﻿using System;
 using Messaging.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Serialization.Protobuf;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -9,6 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static MessagingBuilder AddProtoBuf(this MessagingBuilder builder)
         {
             builder.AddSerializer<ProtoBufSerializer>();
+            builder.Services.AddSingleton(c => c.GetRequiredService<IOptions<ProtoBufOptions>>().Value);
             return builder;
         }
 

@@ -1,6 +1,6 @@
 ﻿using ProtoBuf.Meta;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Serialization.Protobuf
 {
     public class ProtoBufOptions
     {

@@ -24,6 +24,7 @@ namespace Messaging
             _serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
         }
 
+        ///<inheritdoc />
         public Task Publish<TMessage>(TMessage message, CancellationToken token)
         {
             var topic = _typeTopicMap.Get(message.GetType());
@@ -37,7 +38,7 @@ namespace Messaging
             if (serialized == null)
             {
                 throw new InvalidOperationException(
-                    $"Serializer {serialized.GetType()} returned null for message of type {message.GetType()}.");
+                    $"Serializer {_serializer.GetType()} returned null for message of type {message.GetType()}.");
             }
 
             return _rawMessagePublisher.Publish(topic, serialized, token);

@@ -12,9 +12,8 @@ namespace Messaging
         /// Publishes the byte array into the specified topic
         /// </summary>
         /// <param name="topic">The destination to send the message</param>
-        /// <param name="message"The deserialized message
+        /// <param name="message">The deserialized message</param>
         /// <param name="token">A cancellation token</param>
-        /// </param>
         Task Publish(string topic, byte[] message, CancellationToken token);
     }
 }
