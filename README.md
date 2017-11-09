@@ -54,6 +54,7 @@ public class SomeMessageController
     }
 }
 
+
 ```
 
 #### Messaging middleware
@@ -114,3 +115,26 @@ var model = RuntimeTypeModel.Create();
 model.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
 builder.AddProtoBuf(o => o.RuntimeTypeModel = runtimeTypeModel);
 ```
+
+#### Discovering and Invoking handlers
+
+By default. Implementations of `MessageHandler<T>` are discovered and registered dynamically. 
+When classes are in assemblies other than the entry assembly, the library might need some help to find them. Similar to the [MVC Application parts](https://docs.microsoft.com/en-us/aspnet/core/mvc/advanced/app-parts) concept.
+
+Only `public` implementations of `IMessageHandler<T>` will be automatically registered by default.
+ 
+The lifetime of the automatically registered Handlers is `Transient`. Each time a message arrives, the library will ask the container
+for a message handler. Something like: `provider.GetService<IMessageHandler<T>>();` for each call.
+It's advisable you switch to Singleton lifetime in case your handlers are thread-safe.
+
+The characteristic mentioned above can be customized with:
+```csharp
+builder.AddHandlerDiscovery(d =>
+    {
+        d.IncludeNonPublic = true;
+        d.DiscoveredHandlersLifetime = ServiceLifetime.Singleton;
+        d.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
+    });
+``` 
+
+
