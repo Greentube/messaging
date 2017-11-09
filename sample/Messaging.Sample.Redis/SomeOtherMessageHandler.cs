@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Messaging.Sample.Kafka
+namespace Messaging.Sample.Redis
 {
     // Will be discovered (auto-registered)
     public class SomeOtherMessageHandler : IMessageHandler<SomeMessage>

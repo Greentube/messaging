@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using ProtoBuf.Meta;
 
 namespace Messaging.Sample.Kafka
 {
@@ -10,7 +11,7 @@ namespace Messaging.Sample.Kafka
             using (var app = new SomeApp(s =>
                 s.AddMessaging(builder =>
                 {
-                    builder.AddJson();
+                    builder.AddProtoBuf();
                     builder.AddKafka(o =>
                     {
                         o.Properties.BrokerList = "localhost:9092";
@@ -20,8 +21,21 @@ namespace Messaging.Sample.Kafka
                             consumer => consumer.OnError += (sender, error)
                                 => Console.WriteLine($"Consumer error: ${error}");
                     });
+                    builder.ConfigureOptions(o =>
+                    {
+                        o.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
+                    });
+                    builder.AddHandlerDiscovery(d =>
+                    {
+                        d.IncludeNonPublic = true;
+                        d.DiscoveredHandlersLifetime = ServiceLifetime.Singleton;
+                        d.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
+                    });
                 })))
             {
+                // Adds proto definition to the type (another option is to add [ProtoContract] to the class directly)
+                RuntimeTypeModel.Default.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
+
                 app.Run();
             } // Graceful shutdown
         }
