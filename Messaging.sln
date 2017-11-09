@@ -14,39 +14,49 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging", "src\Messaging\Messaging.csproj", "{B6BCB723-BCCD-4AB0-8947-28203FA4A76B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging", "src\Messaging\Messaging.csproj", "{B6BCB723-BCCD-4AB0-8947-28203FA4A76B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.All", "src\Messaging.All\Messaging.All.csproj", "{6D64E53E-D0B4-461D-8272-6B1A6004C2EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.All", "src\Messaging.All\Messaging.All.csproj", "{6D64E53E-D0B4-461D-8272-6B1A6004C2EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection", "src\Messaging.DependencyInjection\Messaging.DependencyInjection.csproj", "{C06FAF2A-0741-4D66-AC44-B6DA022436B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection", "src\Messaging.DependencyInjection\Messaging.DependencyInjection.csproj", "{C06FAF2A-0741-4D66-AC44-B6DA022436B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Kafka", "src\Messaging.DependencyInjection.Kafka\Messaging.DependencyInjection.Kafka.csproj", "{293B140B-060A-437A-A0E5-8470958DB094}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection.Kafka", "src\Messaging.DependencyInjection.Kafka\Messaging.DependencyInjection.Kafka.csproj", "{293B140B-060A-437A-A0E5-8470958DB094}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Redis", "src\Messaging.DependencyInjection.Redis\Messaging.DependencyInjection.Redis.csproj", "{9256485D-ACE3-4B8B-B542-A320D18D1B54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection.Redis", "src\Messaging.DependencyInjection.Redis\Messaging.DependencyInjection.Redis.csproj", "{9256485D-ACE3-4B8B-B542-A320D18D1B54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Serialization.Json", "src\Messaging.DependencyInjection.Serialization.Json\Messaging.DependencyInjection.Serialization.Json.csproj", "{B7A66C0A-6CE7-415A-8102-29EF0E88CB56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection.Serialization.Json", "src\Messaging.DependencyInjection.Serialization.Json\Messaging.DependencyInjection.Serialization.Json.csproj", "{B7A66C0A-6CE7-415A-8102-29EF0E88CB56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Serialization.Protobuf", "src\Messaging.DependencyInjection.Serialization.Protobuf\Messaging.DependencyInjection.Serialization.Protobuf.csproj", "{B9AB9C4F-FE81-412A-9540-D3CB5A951976}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection.Serialization.Protobuf", "src\Messaging.DependencyInjection.Serialization.Protobuf\Messaging.DependencyInjection.Serialization.Protobuf.csproj", "{B9AB9C4F-FE81-412A-9540-D3CB5A951976}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Serialization.Xml", "src\Messaging.DependencyInjection.Serialization.Xml\Messaging.DependencyInjection.Serialization.Xml.csproj", "{7D621A5B-5DC0-4F7E-A45E-0E0172111430}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection.Serialization.Xml", "src\Messaging.DependencyInjection.Serialization.Xml\Messaging.DependencyInjection.Serialization.Xml.csproj", "{7D621A5B-5DC0-4F7E-A45E-0E0172111430}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Kafka", "src\Messaging.Kafka\Messaging.Kafka.csproj", "{B0996A73-A7C4-439A-8ABB-10C5508E38FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Kafka", "src\Messaging.Kafka\Messaging.Kafka.csproj", "{B0996A73-A7C4-439A-8ABB-10C5508E38FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Redis", "src\Messaging.Redis\Messaging.Redis.csproj", "{A69AFF09-CBD4-4D6F-9783-389D3A9A512C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Redis", "src\Messaging.Redis\Messaging.Redis.csproj", "{A69AFF09-CBD4-4D6F-9783-389D3A9A512C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization", "src\Serialization\Serialization.csproj", "{5688D2D6-3DE3-48A4-89B4-7383D579FFF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization", "src\Serialization\Serialization.csproj", "{5688D2D6-3DE3-48A4-89B4-7383D579FFF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization.Json", "src\Serialization.Json\Serialization.Json.csproj", "{9B8DF317-F117-450A-B6E7-32E0973FFC4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization.Json", "src\Serialization.Json\Serialization.Json.csproj", "{9B8DF317-F117-450A-B6E7-32E0973FFC4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization.Protobuf", "src\Serialization.Protobuf\Serialization.Protobuf.csproj", "{32A68DC4-33C9-4A71-8B7E-8D099343EBB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization.Protobuf", "src\Serialization.Protobuf\Serialization.Protobuf.csproj", "{32A68DC4-33C9-4A71-8B7E-8D099343EBB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization.Xml", "src\Serialization.Xml\Serialization.Xml.csproj", "{408C84D7-EC20-4110-BA9F-E9E653E2D763}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization.Xml", "src\Serialization.Xml\Serialization.Xml.csproj", "{408C84D7-EC20-4110-BA9F-E9E653E2D763}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Sample", "sample\Messaging.Sample\Messaging.Sample.csproj", "{C3CD6754-24CB-4922-93ED-1BD5AD244585}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Sample", "sample\Messaging.Sample\Messaging.Sample.csproj", "{C3CD6754-24CB-4922-93ED-1BD5AD244585}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Sample.Kafka", "sample\Messaging.Sample.Kafka\Messaging.Sample.Kafka.csproj", "{654AEC31-045A-4A7B-9B41-6410FFE11B3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Sample.Kafka", "sample\Messaging.Sample.Kafka\Messaging.Sample.Kafka.csproj", "{654AEC31-045A-4A7B-9B41-6410FFE11B3D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.Sample.Redis", "sample\Messaging.Sample.Redis\Messaging.Sample.Redis.csproj", "{0420F7B3-36A8-4892-83FC-D6A502A294DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Sample.Redis", "sample\Messaging.Sample.Redis\Messaging.Sample.Redis.csproj", "{0420F7B3-36A8-4892-83FC-D6A502A294DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{454C1E74-61F0-4E54-9ABA-9BD1711B5A83}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Tests", "test\Messaging.Tests\Messaging.Tests.csproj", "{651DDE93-D051-4080-850C-D74D7978DB92}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization.Tests", "test\Serialization.Tests\Serialization.Tests.csproj", "{553CC1CF-DBD5-43DE-89E5-61D2F8FFE820}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization.Json.Tests", "test\Serialization.Json.Tests\Serialization.Json.Tests.csproj", "{21C36100-392F-472C-A27A-ACC23ED293D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Redis.Tests", "test\Messaging.Redis.Tests\Messaging.Redis.Tests.csproj", "{8F6C83BC-6206-41DB-B717-88ADDC9797B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -122,6 +132,22 @@ Global
 		{0420F7B3-36A8-4892-83FC-D6A502A294DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0420F7B3-36A8-4892-83FC-D6A502A294DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0420F7B3-36A8-4892-83FC-D6A502A294DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{651DDE93-D051-4080-850C-D74D7978DB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{651DDE93-D051-4080-850C-D74D7978DB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{651DDE93-D051-4080-850C-D74D7978DB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{651DDE93-D051-4080-850C-D74D7978DB92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{553CC1CF-DBD5-43DE-89E5-61D2F8FFE820}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{553CC1CF-DBD5-43DE-89E5-61D2F8FFE820}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{553CC1CF-DBD5-43DE-89E5-61D2F8FFE820}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{553CC1CF-DBD5-43DE-89E5-61D2F8FFE820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21C36100-392F-472C-A27A-ACC23ED293D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C36100-392F-472C-A27A-ACC23ED293D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C36100-392F-472C-A27A-ACC23ED293D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C36100-392F-472C-A27A-ACC23ED293D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F6C83BC-6206-41DB-B717-88ADDC9797B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F6C83BC-6206-41DB-B717-88ADDC9797B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F6C83BC-6206-41DB-B717-88ADDC9797B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F6C83BC-6206-41DB-B717-88ADDC9797B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,6 +170,10 @@ Global
 		{C3CD6754-24CB-4922-93ED-1BD5AD244585} = {4E92BAA4-3800-4290-BB6E-752437B37031}
 		{654AEC31-045A-4A7B-9B41-6410FFE11B3D} = {4E92BAA4-3800-4290-BB6E-752437B37031}
 		{0420F7B3-36A8-4892-83FC-D6A502A294DE} = {4E92BAA4-3800-4290-BB6E-752437B37031}
+		{651DDE93-D051-4080-850C-D74D7978DB92} = {454C1E74-61F0-4E54-9ABA-9BD1711B5A83}
+		{553CC1CF-DBD5-43DE-89E5-61D2F8FFE820} = {454C1E74-61F0-4E54-9ABA-9BD1711B5A83}
+		{21C36100-392F-472C-A27A-ACC23ED293D1} = {454C1E74-61F0-4E54-9ABA-9BD1711B5A83}
+		{8F6C83BC-6206-41DB-B717-88ADDC9797B2} = {454C1E74-61F0-4E54-9ABA-9BD1711B5A83}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECC8E5D6-3F47-4B40-A007-E12C770C9F45}

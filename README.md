@@ -1,9 +1,8 @@
-# messaging
+# messaging [![Build Status](https://travis-ci.org/bruno-garcia/monitoring?branch=master)](https://travis-ci.org/bruno-garcia/monitoring) [![Build status](https://ci.appveyor.com/api/projects/status/diurhycgpanx342t/branch/master?svg=true)](https://ci.appveyor.com/project/bruno-garcia/messaging) [![codecov](https://codecov.io/gh/bruno-garcia/messaging/branch/master/graph/badge.svg)](https://codecov.io/gh/bruno-garcia/messaging)
+
 An opinionated messaging library for simple pub/sub with different serialization and message broker/middleware.
 
-To use this library, you need to decide on which [serialization](#serialization) 
-and [messaging middleware](#messaging-middleware).
-
+To use this library, you need to decide on which [serialization](#serialization) and [messaging middleware](#messaging-middleware) to use.
 
 ### Publishing and Handling a message on an ASP.NET Core application
 ```csharp
@@ -56,6 +55,7 @@ public class SomeMessageController
 ```
 
 #### Highlights
+
 * Supports multiple serialization types and messaging middlewares.
 * Message handlers automatically discovered, registered
 * Handlers are resolved through DI with configurable lifetimes
@@ -67,7 +67,6 @@ The current supported messaging systems are:
 
 * [Redis](https://redis.io/topics/pubsub)
 * [Apache Kafka](https://kafka.apache.org/)
-
 
 #### Serialization
 The supported serialization methods are:
