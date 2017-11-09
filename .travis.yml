@@ -4,6 +4,7 @@ mono: none
 os:
   - linux
   - osx
+osx_image: xcode8.1
 dotnet: 2.0.0
 dist: trusty
 env:
