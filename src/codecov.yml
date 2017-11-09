@@ -1,0 +1,6 @@
+# keep track of overall coverage to show diffs
+coverage:
+  status:
+    project:
+      default:
+        enabled: yes
