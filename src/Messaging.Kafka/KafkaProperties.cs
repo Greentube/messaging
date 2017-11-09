@@ -2,6 +2,9 @@
 
 namespace Messaging.Kafka
 {
+    /// <summary>
+    /// The key-value pair of configurations for Apache Kafka
+    /// </summary>
     public class KafkaProperties : Dictionary<string, object>
     {
         public string ClientId

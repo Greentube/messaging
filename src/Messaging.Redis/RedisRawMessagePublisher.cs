@@ -5,6 +5,9 @@ using StackExchange.Redis;
 
 namespace Messaging.Redis
 {
+    /// <summary>
+    /// A Redis Raw Message Publisher
+    /// </summary>
     public class RedisRawMessagePublisher : IRawMessagePublisher
     {
         private readonly ISubscriber _subscriber;
@@ -12,6 +15,13 @@ namespace Messaging.Redis
         public RedisRawMessagePublisher(IConnectionMultiplexer mux) =>
             _subscriber = mux?.GetSubscriber() ?? throw new ArgumentException("No subscription available.", nameof(mux));
 
+        /// <summary>
+        /// Publishes the raw message to the specified topic using Redis Pub/Sub
+        /// </summary>
+        /// <param name="topic"></param>
+        /// <param name="message"></param>
+        /// <param name="_"></param>
+        /// <returns></returns>
         public Task Publish(string topic, byte[] message, CancellationToken _)
         {
             return _subscriber.PublishAsync(topic, message);

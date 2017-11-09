@@ -3,7 +3,6 @@ using Messaging.DependencyInjection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-
     public static class MessagingServiceCollectionExtensions
     {
         public static ServiceCollection AddMessaging(

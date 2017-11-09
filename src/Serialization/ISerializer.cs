@@ -18,8 +18,8 @@ namespace Serialization
         /// <summary>
         /// Deserializes the byte array into an instance of an object
         /// </summary>
+        /// <param name="type">Type of the objec to deserialize</param>
         /// <param name="bytes">The data to deserialize</param>
-        /// <typeparam name="T">The type to instantiate</typeparam>
         /// <returns>The deserialized object</returns>
         object Deserialize(Type type, byte[] bytes);
     }

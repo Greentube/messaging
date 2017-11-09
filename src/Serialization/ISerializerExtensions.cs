@@ -7,6 +7,7 @@ namespace Serialization
         /// <summary>
         /// Deserializes the byte array into an instance of T
         /// </summary>
+        /// <param name="serializer">Serializer</param>
         /// <param name="bytes">The data to deserialize</param>
         /// <typeparam name="T">The type to instantiate</typeparam>
         /// <returns>The deserialized object</returns>

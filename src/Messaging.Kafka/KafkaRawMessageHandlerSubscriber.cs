@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
@@ -8,6 +7,9 @@ using Confluent.Kafka.Serialization;
 
 namespace Messaging.Kafka
 {
+    /// <summary>
+    /// A Kafka Raw Message Handler Subscriber
+    /// </summary>
     public class KafkaRawMessageHandlerSubscriber : IRawMessageHandlerSubscriber, IDisposable
     {
         private readonly ConcurrentDictionary<string,
@@ -16,12 +18,21 @@ namespace Messaging.Kafka
                 (Task task, CancellationTokenSource tokenSource)>();
 
         private readonly KafkaOptions _options;
+        private static readonly ByteArrayDeserializer Deserializer = new ByteArrayDeserializer();
 
-        public KafkaRawMessageHandlerSubscriber(KafkaOptions options)
-        {
+        public KafkaRawMessageHandlerSubscriber(KafkaOptions options) => 
             _options = options ?? throw new ArgumentNullException(nameof(options));
-        }
 
+        /// <summary>
+        /// Subscribes to the specified topic with a Kafka Consumer
+        /// </summary>
+        /// <remarks>
+        /// A Task is created to call the blocking Consumer.Consume method.
+        /// </remarks>
+        /// <param name="topic">The topic to subscribe to</param>
+        /// <param name="rawHandler">The raw handler to invoke with the bytes received</param>
+        /// <param name="subscriptionCancellation">A token to cancel the topic subscription</param>
+        /// <returns></returns>
         public Task Subscribe(string topic, IRawMessageHandler rawHandler, CancellationToken subscriptionCancellation)
         {
             var subscriptionTask = new TaskCompletionSource<bool>();
@@ -70,7 +81,7 @@ namespace Messaging.Kafka
                 Consumer<Null, byte[]> consumer = null;
                 try
                 {
-                    consumer = new Consumer<Null, byte[]>(_options.Properties, null, new ByteArrayDeserializer());
+                    consumer = new Consumer<Null, byte[]>(_options.Properties, null, Deserializer);
                     _options.Subscriber.ConsumerCreatedCallback?.Invoke(consumer);
                     consumer.Subscribe(topic);
                 }

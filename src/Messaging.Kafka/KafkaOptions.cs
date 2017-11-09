@@ -1,5 +1,8 @@
 ﻿namespace Messaging.Kafka
 {
+    /// <summary>
+    /// Kafka Options
+    /// </summary>
     public class KafkaOptions
     {
         /// <summary>
