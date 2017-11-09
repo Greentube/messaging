@@ -10,5 +10,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Messaging.DependencyInjection.Serialization.Xml\Messaging.DependencyInjection.Serialization.Xml.csproj" />
+    <ProjectReference Include="..\..\src\Serialization.Xml\Serialization.Xml.csproj" />
   </ItemGroup>
 </Project>
