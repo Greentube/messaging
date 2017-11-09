@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Messaging
 {
+    /// <summary>
+    /// Provider of type information for <see cref="IMessageHandler"/> implementations
+    /// </summary>
     public class MessageHandlerInfoProvider : IMessageHandlerInfoProvider
     {
         private readonly IMessageTypeTopicMap _typeTopicMap;
 
+        /// <summary>
+        /// Creates an instance of <see cref="MessageHandlerInfoProvider"/> with the specified <see cref="IMessageTypeTopicMap"/>
+        /// </summary>
+        /// <param name="typeTopicMap">A map between Topic names and Message types</param>
         public MessageHandlerInfoProvider(IMessageTypeTopicMap typeTopicMap)
         {
             _typeTopicMap = typeTopicMap ?? throw new ArgumentNullException(nameof(typeTopicMap));
@@ -27,6 +33,7 @@ namespace Messaging
                 Func<object, object, CancellationToken, Task> handleMethod)>
             GetHandlerInfo()
         {
+            // Creates a a tuple with the type of handler and message with a delegate to invoke the Handle.
             return from messageType in _typeTopicMap.GetMessageTypes()
                 let handlerType = typeof(IMessageHandler<>).MakeGenericType(messageType)
                 let handleMethod = handlerType.GetTypeInfo().GetMethod(nameof(IMessageHandler<object>.Handle))

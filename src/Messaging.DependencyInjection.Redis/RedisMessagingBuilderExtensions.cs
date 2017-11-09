@@ -1,5 +1,4 @@
-﻿using Messaging;
-using Messaging.DependencyInjection;
+﻿using Messaging.DependencyInjection;
 using Messaging.Redis;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using StackExchange.Redis;
@@ -11,9 +10,8 @@ namespace Microsoft.Extensions.DependencyInjection
         // Adds redis assuming a multiplexer has been previously registered
         public static MessagingBuilder AddRedis(this MessagingBuilder builder)
         {
-            var services = builder.Services;
-            services.TryAddSingleton<IRawMessagePublisher, RedisRawMessagePublisher>();
-            services.TryAddSingleton<IRawMessageHandlerSubscriber, RedisRawMessageHandlerSubscriber>();
+            builder.AddRawMessagePublisher<RedisRawMessagePublisher>();
+            builder.AddRawMessageHandlerSubscriber<RedisRawMessageHandlerSubscriber>();
             return builder;
         }
 

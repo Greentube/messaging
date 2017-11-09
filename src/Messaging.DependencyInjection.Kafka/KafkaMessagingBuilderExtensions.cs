@@ -1,8 +1,6 @@
 ﻿using System;
-using Messaging;
 using Messaging.DependencyInjection;
 using Messaging.Kafka;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -11,11 +9,9 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static MessagingBuilder AddKafka(this MessagingBuilder builder)
         {
-            var services = builder.Services;
-            services.TryAddSingleton<IRawMessagePublisher, KafkaRawMessagePublisher>();
-            services.TryAddSingleton<IRawMessageHandlerSubscriber, KafkaRawMessageHandlerSubscriber>();
+            builder.AddRawMessagePublisher<KafkaRawMessagePublisher>();
+            builder.AddRawMessageHandlerSubscriber<KafkaRawMessageHandlerSubscriber>();
             builder.Services.AddSingleton(c => c.GetRequiredService<IOptions<KafkaOptions>>().Value);
-
             return builder;
         }
 

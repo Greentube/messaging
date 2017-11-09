@@ -5,20 +5,6 @@ using System.Collections.Generic;
 
 namespace Messaging
 {
-    /// <summary>
-    /// Map of message type and correspondent topic
-    /// </summary>
-    public interface IMessageTypeTopicMap : IReadOnlyCollection<KeyValuePair<Type, string>>
-    {
-        void Add(Type type, string topic);
-        void Remove(Type type);
-
-        string Get(Type type);
-        Type Get(string topic);
-        IEnumerable<string> GetTopics();
-        IEnumerable<Type> GetMessageTypes();
-    }
-
     /// <inheritdoc cref="IMessageTypeTopicMap"/>
     public class MessageTypeTopicMap : IMessageTypeTopicMap
     {
@@ -32,6 +18,7 @@ namespace Messaging
         public IEnumerator<KeyValuePair<Type, string>> GetEnumerator() => _messageTopicMap.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        /// <inheritdoc />
         public void Add(Type type, string topic)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
@@ -43,6 +30,7 @@ namespace Messaging
             }
         }
 
+        /// <inheritdoc />
         public string Get(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
@@ -51,6 +39,7 @@ namespace Messaging
             return topic;
         }
 
+        /// <inheritdoc />
         public Type Get(string topic)
         {
             if (topic == null) throw new ArgumentNullException(nameof(topic));
@@ -59,16 +48,19 @@ namespace Messaging
             return type;
         }
 
+        /// <inheritdoc />
         public IEnumerable<string> GetTopics()
         {
             return _messageTopicMap.Values;
         }
 
+        /// <inheritdoc />
         public IEnumerable<Type> GetMessageTypes()
         {
             return _topicMessageMap.Values;
         }
 
+        /// <inheritdoc />
         public void Remove(Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
