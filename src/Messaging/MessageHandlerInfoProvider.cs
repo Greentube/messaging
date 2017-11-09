@@ -1,36 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.InteropServices.ComTypes;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Messaging
 {
     public class MessageHandlerInfoProvider : IMessageHandlerInfoProvider
     {
-        private readonly MessageHandlerAssemblies _handlerAssemblies;
+        private readonly IMessageTypeTopicMap _typeTopicMap;
 
-        public MessageHandlerInfoProvider(MessageHandlerAssemblies handlerAssemblies)
+        public MessageHandlerInfoProvider(IMessageTypeTopicMap typeTopicMap)
         {
-            _handlerAssemblies = handlerAssemblies ?? throw new ArgumentNullException(nameof(handlerAssemblies));
+            _typeTopicMap = typeTopicMap ?? throw new ArgumentNullException(nameof(typeTopicMap));
 
-            if (!_handlerAssemblies.Any())
-                throw new ArgumentException(
-                    $"{nameof(MessagingOptions)} has no available {nameof(MessageHandlerAssemblies)} defined.");
+            if (!_typeTopicMap.Any())
+                throw new ArgumentException($"{nameof(IMessageTypeTopicMap)} is empty.");
         }
 
-        public IEnumerable<(Type messageType, Type handlerType, MethodInfo handleMethod)> GetHandlerInfo()
+        public IEnumerable<(
+                Type messageType,
+                Type handlerType,
+                Func<object, object, CancellationToken, Task> handleMethod)>
+            GetHandlerInfo()
         {
-            return from asm in _handlerAssemblies
-                from type in asm.GetTypes()
-                let typeInfo = type.GetTypeInfo()
-                where typeInfo.IsClass
-                      && !typeInfo.IsAbstract
-                from inf in typeInfo.GetInterfaces().Select(t => t.GetTypeInfo())
-                where inf.IsGenericType
-                      && inf.GetGenericTypeDefinition() == typeof(IMessageHandler<>)
-                let messageType = inf.GetGenericArguments().Single()
-                let handleMethod = inf.GetMethod(nameof(IMessageHandler<object>.Handle))
-                select (messageType, type, handleMethod);
+            return from messageType in _typeTopicMap.GetMessageTypes()
+                let handlerType = typeof(IMessageHandler<>).MakeGenericType(messageType)
+                let handleMethod = handlerType.GetTypeInfo().GetMethod(nameof(IMessageHandler<object>.Handle))
+                let handlerInstance = Expression.Parameter(typeof(object))
+                let messageInstance = Expression.Parameter(typeof(object))
+                let tokenInstance = Expression.Parameter(typeof(CancellationToken))
+                let handleFunc = Expression.Lambda<Func<object, object, CancellationToken, Task>>(
+                    Expression.Call(
+                        Expression.Convert(
+                            handlerInstance,
+                            handlerType),
+                        handleMethod,
+                        Expression.Convert(
+                            messageInstance,
+                            messageType),
+                        tokenInstance),
+                    handlerInstance,
+                    messageInstance,
+                    tokenInstance)
+                    .Compile()
+                select (messageType, handlerType, handleFunc);
         }
     }
 }

@@ -23,7 +23,6 @@ namespace Messaging.Sample.Kafka
                     });
                     builder.ConfigureOptions(o =>
                     {
-                        o.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
                     });
                     builder.AddHandlerDiscovery(d =>
                     {

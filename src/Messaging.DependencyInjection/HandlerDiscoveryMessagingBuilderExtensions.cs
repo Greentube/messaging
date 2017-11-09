@@ -2,6 +2,7 @@
 using Messaging;
 using Messaging.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Scrutor;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -28,14 +29,16 @@ namespace Microsoft.Extensions.DependencyInjection
             return builder;
         }
 
-        internal static MessagingBuilder AddHandlerDiscovery(this MessagingBuilder builder, DiscoverySettings discoverySettings)
+        public static MessagingBuilder AddHandlerDiscovery(this MessagingBuilder builder, DiscoverySettings discoverySettings)
         {
             builder.Services.Scan(s =>
                 s.FromAssemblies(discoverySettings.MessageHandlerAssemblies)
                     .AddClasses(f => f.AssignableTo(typeof(IMessageHandler<>)), !discoverySettings.IncludeNonPublic)
                     .UsingRegistrationStrategy(discoverySettings.RegistrationStrategy)
-                    .AsSelf()
+                    .AsImplementedInterfaces()
                     .WithLifetime(discoverySettings.DiscoveredHandlersLifetime));
+
+            builder.Services.TryAddSingleton(discoverySettings.MessageHandlerAssemblies);
 
             return builder;
         }

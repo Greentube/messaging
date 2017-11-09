@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Messaging
 {
@@ -9,6 +11,6 @@ namespace Messaging
     /// </summary>
     public interface IMessageHandlerInfoProvider
     {
-        IEnumerable<(Type messageType, Type handlerType, MethodInfo handleMethod)> GetHandlerInfo();
+        IEnumerable<(Type messageType, Type handlerType, Func<object, object, CancellationToken, Task>  handleMethod)> GetHandlerInfo();
     }
 }

@@ -16,6 +16,7 @@ namespace Messaging
         string Get(Type type);
         Type Get(string topic);
         IEnumerable<string> GetTopics();
+        IEnumerable<Type> GetMessageTypes();
     }
 
     /// <inheritdoc cref="IMessageTypeTopicMap"/>
@@ -61,6 +62,11 @@ namespace Messaging
         public IEnumerable<string> GetTopics()
         {
             return _messageTopicMap.Values;
+        }
+
+        public IEnumerable<Type> GetMessageTypes()
+        {
+            return _topicMessageMap.Values;
         }
 
         public void Remove(Type type)

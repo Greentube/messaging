@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 
 namespace Messaging.DependencyInjection
 {
@@ -12,7 +11,6 @@ namespace Messaging.DependencyInjection
 
         private static void ConfigureOptions(MessagingOptions options)
         {
-            options.MessageHandlerAssemblies.Add(Assembly.GetEntryAssembly());
         }
     }
 }

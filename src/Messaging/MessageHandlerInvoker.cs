@@ -10,7 +10,10 @@ namespace Messaging
     ///<inheritdoc />
     public class MessageHandlerInvoker : IMessageHandlerInvoker
     {
-        private readonly Dictionary<Type, (Type handlerType, MethodInfo handleMethod)> _messageToHandlerDictionary;
+        private readonly Dictionary<
+                Type,
+                (Type handlerType, Func<object, object, CancellationToken, Task> handleMethod)>
+                _messageToHandlerDictionary;
 
         private readonly Func<Type, object> _handlerFactory;
 
@@ -41,10 +44,9 @@ namespace Messaging
             }
 
             var handler = _handlerFactory(handlerInfo.handlerType);
-            if (handler == null) throw new InvalidOperationException("Message of type {message.GetType()} yielded no handler from factory.");
+            if (handler == null) throw new InvalidOperationException($"Message of type {message.GetType()} yielded no handler from factory.");
 
-            var task = handlerInfo.handleMethod.Invoke(handler, new[] {message, token}) as Task;
-            return task;
+            return handlerInfo.handleMethod(handler, message, token);
         }
     }
 }
