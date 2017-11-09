@@ -10,11 +10,12 @@ namespace Messaging.Kafka
     {
         private readonly KafkaOptions _options;
         private readonly Producer<Null, byte[]> _producer;
+        private static ByteArraySerializer _byteArraySerializier = new ByteArraySerializer();
 
         public KafkaRawMessagePublisher(KafkaOptions options)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
-            _producer = new Producer<Null, byte[]>(options.Properties, null, new ByteArraySerializer());
+            _producer = new Producer<Null, byte[]>(options.Properties, null, _byteArraySerializier);
             _options.Publisher.ProducerCreatedCallback?.Invoke(_producer);
         }
 
