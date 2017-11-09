@@ -27,12 +27,10 @@ public class SomeMessageHandler : IMessageHandler<SomeMessage>
 // Startup.cs
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddMessaging(builder =>
-    {
-        builder.AddProtoBuf();
-        builder.AddRedis();
-        builder.MessageTypeTopicMap.Add(typeof(SomeMessage), "SomeTopic");
-    });
+    services.AddMessaging(builder => builder
+        .AddProtoBuf();
+        .AddRedis();
+        .AddTopic<SomeMessage>("some.topic"));
 }
 public void Configure(IApplicationBuilder app)
 {
@@ -56,6 +54,13 @@ public class SomeMessageController
 
 
 ```
+
+#### Highlights
+* Supports multiple serialization types and messaging middlewares.
+* Message handlers automatically discovered, registered
+* Handlers are resolved through DI with configurable lifetimes
+* Handler invocation done with [Expression trees](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/expression-trees/)
+* Doesn't require implementing any interfaces or declaring attributes
 
 #### Messaging middleware
 The current supported messaging systems are:
@@ -118,16 +123,18 @@ builder.AddProtoBuf(o => o.RuntimeTypeModel = runtimeTypeModel);
 
 #### Discovering and Invoking handlers
 
-By default. Implementations of `MessageHandler<T>` are discovered and registered dynamically. 
-When classes are in assemblies other than the entry assembly, the library might need some help to find them. Similar to the [MVC Application parts](https://docs.microsoft.com/en-us/aspnet/core/mvc/advanced/app-parts) concept.
+By default. Implementations of `IMessageHandler<T>` are discovered and registered dynamically. 
+When classes are in assemblies other than the entry assembly or the assemblies where `TMessage` is defined, 
+the library might need some help to find them. Similar to the [MVC Application parts](https://docs.microsoft.com/en-us/aspnet/core/mvc/advanced/app-parts) concept.
 
 Only `public` implementations of `IMessageHandler<T>` will be automatically registered by default.
- 
+
+Your handlers will be created via DI. That means you can take dependencies via the constructor but mind the lifetime:
 The lifetime of the automatically registered Handlers is `Transient`. Each time a message arrives, the library will ask the container
 for a message handler. Something like: `provider.GetService<IMessageHandler<T>>();` for each call.
 It's advisable you switch to Singleton lifetime in case your handlers are thread-safe.
 
-The characteristic mentioned above can be customized with:
+The characteristics mentioned above can be customized with:
 ```csharp
 builder.AddHandlerDiscovery(d =>
     {
@@ -137,4 +144,12 @@ builder.AddHandlerDiscovery(d =>
     });
 ``` 
 
+#### Features planned:
 
+* Add Message to Topic name map via Attributes
+
+#### Limitations
+
+Currently it only supports a single Handler per Message type. You can easily work around it by implementing some
+composite pattern on your Handler by dispatching a call to multiple, pontentially in multiple threads, etc.
+We can consider adding such support if there's demand.

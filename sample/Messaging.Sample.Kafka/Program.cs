@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using ProtoBuf.Meta;
 
@@ -9,10 +10,11 @@ namespace Messaging.Sample.Kafka
         static void Main()
         {
             using (var app = new SomeApp(s =>
-                s.AddMessaging(builder =>
-                {
-                    builder.AddProtoBuf();
-                    builder.AddKafka(o =>
+                s.AddMessaging(builder => builder
+                    .AddTopic<SomeMessage>("some.topic")
+                    .AddTopic<SomeOtherMessage>("some.topic.other")
+                    .AddProtoBuf()
+                    .AddKafka(o =>
                     {
                         o.Properties.BrokerList = "localhost:9092";
                         o.Properties.GroupId = "Sample-GroupId";
@@ -20,25 +22,25 @@ namespace Messaging.Sample.Kafka
                         o.Subscriber.ConsumerCreatedCallback =
                             consumer => consumer.OnError += (sender, error)
                                 => Console.WriteLine($"Consumer error: ${error}");
-                    });
-                    builder.ConfigureOptions(o =>
-                    {
-                    });
-                    builder.AddHandlerDiscovery(d =>
+                    })
+                    .ConfigureOptions(o => { })
+                    .AddHandlerDiscovery(d =>
                     {
                         d.IncludeNonPublic = true;
                         d.DiscoveredHandlersLifetime = ServiceLifetime.Singleton;
                         d.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
-                    });
-                })))
+                    }))))
             {
                 // Adds proto definition to the type (another option is to add [ProtoContract] to the class directly)
                 RuntimeTypeModel.Default.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
+                RuntimeTypeModel.Default.Add(typeof(SomeOtherMessage), false).Add(1, nameof(SomeOtherMessage.Number));
 
-                app.Run();
+                var publisher = app.Run();
+                for (int i = 0; i < 3; i++)
+                {
+                    publisher.Publish(new SomeOtherMessage {Number = i}, CancellationToken.None);
+                }
             } // Graceful shutdown
         }
     }
-
-
 }

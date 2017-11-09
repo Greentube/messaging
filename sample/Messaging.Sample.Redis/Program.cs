@@ -7,13 +7,12 @@ namespace Messaging.Sample.Redis
     {
         static void Main()
         {
-            using (var app = new SomeApp(s =>
-                s.AddMessaging(builder =>
-                    {
-                        builder.AddJson();
-                        builder.AddRedis();
-                    })
-                    .AddSingleton<IConnectionMultiplexer>(_ =>
+            using (var app = new SomeApp(s => s
+                .AddMessaging(builder => builder
+                        .AddJson()
+                        .AddRedis()
+                        .AddTopic<SomeMessage>("topic"))
+                .AddSingleton<IConnectionMultiplexer>(
                         ConnectionMultiplexer.Connect("localhost:6379"))))
             {
                 app.Run();

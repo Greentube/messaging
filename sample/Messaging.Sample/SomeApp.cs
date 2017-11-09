@@ -16,20 +16,12 @@ namespace Messaging.Sample
             // Sample specific setup: .AddMessaging()
             servicesAction(services);
 
-            // options.MessageTypeTopicMap.Add(type,topic);
-            // - auto discovery based on SomeMessage attributes?
-            services.AddSingleton<IMessageTypeTopicMap>(c =>
-                new MessageTypeTopicMap
-                {
-                    {typeof(SomeMessage), "SomeTopic"}
-                });
-
             services.AddOptions();
 
             _serviceProvider = services.BuildServiceProvider();
 
             // Configure()
-            // app.AddSubscriptions()
+            // app.AddMessagingSubscriptions()
             var map = _serviceProvider.GetRequiredService<IMessageTypeTopicMap>();
             var rawSubscriber = _serviceProvider.GetRequiredService<IRawMessageHandlerSubscriber>();
             var rawHandler = _serviceProvider.GetRequiredService<IRawMessageHandler>();
@@ -41,7 +33,7 @@ namespace Messaging.Sample
             }
         }
 
-        public void Run()
+        public IMessagePublisher Run()
         {
             var publisher = _serviceProvider.GetRequiredService<IMessagePublisher>();
 
@@ -50,12 +42,14 @@ namespace Messaging.Sample
                 .GetAwaiter()
                 .GetResult();
 
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
+            return publisher;
         }
 
         public void Dispose()
         {
+            Console.WriteLine("Running... Press any key to quit.");
+            Console.ReadKey();
+
             _serviceProvider.Dispose();
         }
     }
