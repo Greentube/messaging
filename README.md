@@ -28,8 +28,8 @@ public class SomeMessageHandler : IMessageHandler<SomeMessage>
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddMessaging(builder => builder
-        .AddProtoBuf();
-        .AddRedis();
+        .AddProtoBuf()
+        .AddRedis()
         .AddTopic<SomeMessage>("some.topic"));
 }
 public void Configure(IApplicationBuilder app)
