@@ -74,38 +74,52 @@ namespace Messaging.DependencyInjection
 
         public void Build()
         {
-            EnsureExternallyDependentServices();
+            var support = VerifyMessagingSupport();
 
+            // Configuration
             Services.TryAddEnumerable(ServiceDescriptor.Transient<IConfigureOptions<MessagingOptions>, DefaultMessagingOptionsSetup>());
             Services.AddSingleton(c => c.GetRequiredService<IOptions<MessagingOptions>>().Value);
 
-            // Add Messaging services
-            Services.TryAddSingleton<IMessagePublisher, SerializedMessagePublisher>();
-            Services.TryAddSingleton<IRawMessageHandler, DispatchingRawMessageHandler>();
-            Services.TryAddSingleton<IMessageHandlerInfoProvider, MessageHandlerInfoProvider>();
-            Services.TryAddSingleton<IMessageHandlerInvoker>(c =>
-                new MessageHandlerInvoker(
-                    c.GetService<IMessageHandlerInfoProvider>(),
-                    c.GetService));
-
+            // Map: used by both Publishing and subscribing
             Services.TryAddSingleton<IMessageTypeTopicMap>(_messageTypeTopic);
 
-            AddHandlerDiscovery();
+            if (support.supportPublishing)
+            {
+                Services.TryAddSingleton<IMessagePublisher, SerializedMessagePublisher>();
+            }
+
+            if (support.supportHandling)
+            {
+                Services.TryAddSingleton<IRawMessageHandler, DispatchingRawMessageHandler>();
+                Services.TryAddSingleton<IMessageHandlerInfoProvider, MessageHandlerInfoProvider>();
+                Services.TryAddSingleton<IMessageHandlerInvoker>(c =>
+                    new MessageHandlerInvoker(
+                        c.GetService<IMessageHandlerInfoProvider>(),
+                        c.GetService));
+
+                AddHandlerDiscovery();
+            }
         }
 
-        private void EnsureExternallyDependentServices()
+        private (bool supportPublishing, bool supportHandling) VerifyMessagingSupport()
         {
             var serializers = Services.Count(s => s.ServiceType == typeof(ISerializer));
             if (serializers == 0) throw new InvalidOperationException($"No serializer has been configured. Call builder.{nameof(AddSerializer)}");
             if (serializers > 1) throw new InvalidOperationException("More than one serializer has been configured. Please define a single one.");
 
-            var rawPublisher = Services.Count(s => s.ServiceType == typeof(IRawMessagePublisher));
-            if (rawPublisher == 0) throw new InvalidOperationException($"No raw publisher has been configured. Call builder.{nameof(AddRawMessagePublisher)}");
-            if (rawPublisher > 1) throw new InvalidOperationException("More than one raw publisher has been configured. Please define a single one.");
+            var rawPublishers = Services.Count(s => s.ServiceType == typeof(IRawMessagePublisher));
+            if (rawPublishers > 1) throw new InvalidOperationException("More than one raw publisher has been configured. Please define a single one.");
 
-            var rawHandlerSubscriber = Services.Count(s => s.ServiceType == typeof(IRawMessageHandlerSubscriber));
-            if (rawHandlerSubscriber == 0) throw new InvalidOperationException($"No raw handler subscriber has been configured. Call builder.{nameof(AddRawMessageHandlerSubscriber)}");
-            if (rawHandlerSubscriber > 1) throw new InvalidOperationException("More than one raw handler subscriber has been configured. Please define a single one.");
+            var rawHandlerSubscribers = Services.Count(s => s.ServiceType == typeof(IRawMessageHandlerSubscriber));
+            if (rawHandlerSubscribers > 1) throw new InvalidOperationException("More than one raw handler subscriber has been configured. Please define a single one.");
+
+            (bool supportPublishing, bool supportHandling) support = (rawPublishers == 1, rawHandlerSubscribers == 1);
+
+            if (!support.supportHandling && !support.supportPublishing)
+                throw new InvalidOperationException("No raw publisher or raw handler subscriber have been configured. " +
+                                                    "It won't be possible to either Publish nor Handle messages. " +
+                                                    $"To Publish messages, call builder.{nameof(AddRawMessagePublisher)} " +
+                                                    $"To Handle messages, call builder.{nameof(AddRawMessageHandlerSubscriber)}.");
 
             // No calls to AddTopic and no IMessageTypeTopicMap registered yet, we fail
             if (!_messageTypeTopic.Any() &&
@@ -114,6 +128,8 @@ namespace Messaging.DependencyInjection
                 throw new InvalidOperationException($"Can't build messaging without any topics. Consider calling '{nameof(AddTopic)}' on the builder " +
                                                     $"or register your own: {nameof(IMessageTypeTopicMap)} before adding messaging.");
             }
+
+            return support;
         }
     }
 }

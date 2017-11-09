@@ -16,7 +16,7 @@ namespace Messaging.Redis
             _subscriber = mux?.GetSubscriber() ?? throw new ArgumentException("No subscription available.", nameof(mux));
 
         /// <summary>
-        /// Publishes the raw message to the specified topic using Redis Pub/Sub
+        /// Publishes the raw message to the topic using Redis Pub/Sub
         /// </summary>
         /// <param name="topic"></param>
         /// <param name="message"></param>
