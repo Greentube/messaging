@@ -1,4 +1,4 @@
-# messaging [![Build Status](https://travis-ci.org/bruno-garcia/monitoring?branch=master)](https://travis-ci.org/bruno-garcia/monitoring) [![Build status](https://ci.appveyor.com/api/projects/status/diurhycgpanx342t/branch/master?svg=true)](https://ci.appveyor.com/project/bruno-garcia/messaging) [![codecov](https://codecov.io/gh/bruno-garcia/messaging/branch/master/graph/badge.svg)](https://codecov.io/gh/bruno-garcia/messaging)
+# messaging [![Build Status](https://travis-ci.org/bruno-garcia/messaging?branch=master)](https://travis-ci.org/bruno-garcia/messaging) [![Build status](https://ci.appveyor.com/api/projects/status/diurhycgpanx342t/branch/master?svg=true)](https://ci.appveyor.com/project/bruno-garcia/messaging) [![codecov](https://codecov.io/gh/bruno-garcia/messaging/branch/master/graph/badge.svg)](https://codecov.io/gh/bruno-garcia/messaging)
 
 An opinionated messaging library for simple pub/sub with different serialization and message broker/middleware.
 
