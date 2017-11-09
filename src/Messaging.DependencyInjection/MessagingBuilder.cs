@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Serialization;
 
 namespace Messaging.DependencyInjection
@@ -23,7 +22,7 @@ namespace Messaging.DependencyInjection
         public void AddSerializer<TSerializer>(ServiceLifetime lifetime = ServiceLifetime.Singleton)
             where TSerializer : ISerializer
         {
-            Services.Add(ServiceDescriptor.Describe(typeof(ISerializer),typeof(TSerializer),lifetime));
+            Services.Add(ServiceDescriptor.Describe(typeof(ISerializer), typeof(TSerializer), lifetime));
         }
 
         public void Build()
@@ -35,8 +34,11 @@ namespace Messaging.DependencyInjection
             }
             if (serializers > 1)
             {
-                throw new InvalidOperationException("More than one serializer has been configured. Please define a single serializer.");
+                throw new InvalidOperationException(
+                    "More than one serializer has been configured. Please define a single serializer.");
             }
+
+            this.AddHandlerDiscovery();
         }
     }
 }

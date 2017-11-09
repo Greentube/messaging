@@ -27,6 +27,12 @@ namespace Microsoft.Extensions.DependencyInjection
                     c.GetService<IMessageHandlerInfoProvider>(),
                     c.GetService));
 
+            services.TryAddSingleton(p =>
+            {
+                var messagingOptions = p.GetRequiredService<MessagingOptions>();
+                return messagingOptions.MessageHandlerAssemblies;
+            });
+
             var builder = new MessagingBuilder(services);
             builderAction?.Invoke(builder);
             builder.Build();

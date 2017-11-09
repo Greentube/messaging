@@ -12,7 +12,7 @@ namespace Messaging.DependencyInjection
 
         private static void ConfigureOptions(MessagingOptions options)
         {
-            options.DiscoveryOptions.MessageHandlerAssemblies.Add(Assembly.GetEntryAssembly());
+            options.MessageHandlerAssemblies.Add(Assembly.GetEntryAssembly());
         }
     }
 }

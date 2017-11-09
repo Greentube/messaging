@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Messaging
 {
+    ///<inheritdoc />
     public class MessageHandlerInvoker : IMessageHandlerInvoker
     {
         private readonly Dictionary<Type, (Type handlerType, MethodInfo handleMethod)> _messageToHandlerDictionary;
@@ -24,8 +25,14 @@ namespace Messaging
                 .ToDictionary(
                     k => k.messageType,
                     v => (v.handlerType, v.handleMethod));
+
+            if (!_messageToHandlerDictionary.Any())
+                throw new InvalidOperationException(
+                    $"{nameof(IMessageHandlerInfoProvider)}.{nameof(IMessageHandlerInfoProvider.GetHandlerInfo)} " +
+                    "hasn't resolved any handler information.");
         }
 
+        ///<inheritdoc />
         public Task Invoke(object message, CancellationToken token)
         {
             if (!_messageToHandlerDictionary.TryGetValue(message.GetType(), out var handlerInfo))

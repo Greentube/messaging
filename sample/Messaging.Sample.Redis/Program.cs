@@ -1,7 +1,5 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using ProtoBuf.Meta;
-using Serialization.Protobuf;
 using StackExchange.Redis;
 
 namespace Messaging.Sample.Redis
@@ -17,8 +15,13 @@ namespace Messaging.Sample.Redis
                         builder.AddRedis();
                         builder.ConfigureOptions(o =>
                         {
-                            o.DiscoveryOptions.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
-                            o.DiscoveryOptions.IncludeNonPubicHandlers = true;
+                            o.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
+                        });
+                        builder.AddHandlerDiscovery(d =>
+                        {
+                            d.IncludeNonPublic = true;
+                            d.DiscoveredHandlersLifetime = ServiceLifetime.Singleton;
+                            d.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
                         });
                     })
                     .AddSingleton<IConnectionMultiplexer>(_ =>
@@ -32,4 +35,5 @@ namespace Messaging.Sample.Redis
             } // Graceful shutdown
         }
     }
+
 }

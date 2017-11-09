@@ -19,18 +19,13 @@ namespace Messaging.Sample.Kafka
                         o.Subscriber.ConsumerCreatedCallback =
                             consumer => consumer.OnError += (sender, error)
                                 => Console.WriteLine($"Consumer error: ${error}");
-
-                    });
-                    builder.ConfigureOptions(o =>
-                    {
-                        o.DiscoveryOptions.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
-                        o.DiscoveryOptions.IncludeNonPubicHandlers = true;
                     });
                 })))
             {
-
                 app.Run();
             } // Graceful shutdown
         }
     }
+
+
 }

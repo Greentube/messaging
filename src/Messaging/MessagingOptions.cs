@@ -2,6 +2,6 @@
 {
     public class MessagingOptions
     {
-        public MessageHandlerDiscoveryOptions DiscoveryOptions { get; } = new MessageHandlerDiscoveryOptions();
+        public MessageHandlerAssemblies MessageHandlerAssemblies { get; set; } = new MessageHandlerAssemblies();
     }
 }

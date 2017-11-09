@@ -24,9 +24,6 @@ namespace Messaging.Sample
                     {typeof(SomeMessage), "SomeTopic"}
                 });
 
-            services.AddScoped<IMessageHandler<SomeMessage>, SomeMessageHandler>();
-            services.AddScoped<SomeMessageHandler, SomeMessageHandler>();
-
             services.AddOptions();
 
             _serviceProvider = services.BuildServiceProvider();

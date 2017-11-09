@@ -7,26 +7,24 @@ namespace Messaging
 {
     public class MessageHandlerInfoProvider : IMessageHandlerInfoProvider
     {
-        private readonly MessageHandlerDiscoveryOptions _discoveryOptions;
+        private readonly MessageHandlerAssemblies _handlerAssemblies;
 
-        public MessageHandlerInfoProvider(MessagingOptions options)
+        public MessageHandlerInfoProvider(MessageHandlerAssemblies handlerAssemblies)
         {
-            if (options == null) throw new ArgumentNullException(nameof(options));
-            _discoveryOptions = options.DiscoveryOptions;
+            _handlerAssemblies = handlerAssemblies ?? throw new ArgumentNullException(nameof(handlerAssemblies));
 
-            if (!_discoveryOptions?.MessageHandlerAssemblies?.Any() ?? false)
+            if (!_handlerAssemblies.Any())
                 throw new ArgumentException(
                     $"{nameof(MessagingOptions)} has no available {nameof(MessageHandlerAssemblies)} defined.");
         }
 
         public IEnumerable<(Type messageType, Type handlerType, MethodInfo handleMethod)> GetHandlerInfo()
         {
-            return from asm in _discoveryOptions.MessageHandlerAssemblies
+            return from asm in _handlerAssemblies
                 from type in asm.GetTypes()
                 let typeInfo = type.GetTypeInfo()
                 where typeInfo.IsClass
                       && !typeInfo.IsAbstract
-                      && typeInfo.IsPublic || _discoveryOptions.IncludeNonPubicHandlers
                 from inf in typeInfo.GetInterfaces().Select(t => t.GetTypeInfo())
                 where inf.IsGenericType
                       && inf.GetGenericTypeDefinition() == typeof(IMessageHandler<>)
