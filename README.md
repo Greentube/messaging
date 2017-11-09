@@ -15,7 +15,7 @@ public class SomeMessage
 }
 
 // Handling messages: Class implementing IMessageHandler<T> to be invoked when T arrives
-internal class SomeMessageHandler : IMessageHandler<SomeMessage>
+public class SomeMessageHandler : IMessageHandler<SomeMessage>
 {
     public Task Handle(SomeMessage message, CancellationToken _)
     {
@@ -27,12 +27,10 @@ internal class SomeMessageHandler : IMessageHandler<SomeMessage>
 // Startup.cs
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddSingleton<IMessageHandler<SomeMessage>, SomeMessageHandler>();
     services.AddMessaging(builder =>
     {
         builder.AddProtoBuf();
         builder.AddRedis();
-        builder.ConfigureOptions(o => { o.DiscoveryOptions.IncludeNonPubicHandlers = true; });
         builder.MessageTypeTopicMap.Add(typeof(SomeMessage), "SomeTopic");
     });
 }
