@@ -15,7 +15,7 @@ namespace Messaging.DependencyInjection
 
         internal MessagingBuilder(IServiceCollection services)
         {
-            Services = services;
+            Services = services ?? throw new ArgumentNullException(nameof(services));
         }
 
         public MessagingBuilder ConfigureOptions(Action<MessagingOptions> options)
