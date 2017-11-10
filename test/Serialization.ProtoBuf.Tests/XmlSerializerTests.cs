@@ -1,55 +1,44 @@
-using System;
-using System.Text;
+﻿using System;
+using Serialization.Protobuf;
 using Xunit;
 
-namespace Serialization.Json.Tests
+namespace Serialization.ProtoBuf.Tests
 {
-    public class JsonConvertSerializerTests
+    public class ProtoBufSerializerTests
     {
-       [Fact]
-        public void Serialize_EncodingDefined()
-        {
-            var sut = new JsonSerializer(new JsonOptions { Encoding = Encoding.ASCII });
-
-            var actualBytes = sut.Serialize("Não suporta!");
-
-            var actual = Encoding.UTF8.GetString(actualBytes);
-            Assert.Equal("\"N?o suporta!\"", actual);
-        }
-
         [Fact]
         public void Serialize_NullObject_ThrowsNullArgument()
         {
-            var sut = new JsonSerializer(new JsonOptions());
+            var sut = new ProtoBufSerializer(new ProtoBufOptions());
             Assert.Throws<ArgumentNullException>(() => sut.Serialize((object) null));
         }
 
         [Fact]
         public void Deserialize_NullType_ThrowsNullArgument()
         {
-            var sut = new JsonSerializer(new JsonOptions());
+            var sut = new ProtoBufSerializer(new ProtoBufOptions());
             Assert.Throws<ArgumentNullException>(() => sut.Deserialize(null, new byte[0]));
         }
 
         [Fact]
         public void Deserialize_NullBytes_ThrowsNullArgument()
         {
-            var sut = new JsonSerializer(new JsonOptions());
+            var sut = new ProtoBufSerializer(new ProtoBufOptions());
             Assert.Throws<ArgumentNullException>(() => sut.Deserialize(GetType(), null));
         }
 
         [Fact]
         public void Constructor_NullOptions_ThrowsArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(() => new JsonSerializer(null));
+            Assert.Throws<ArgumentNullException>(() => new ProtoBufSerializer(null));
         }
 
         [Fact]
         public void Serialize_Deserialize()
         {
-            // simple round-trip: here we're just testing JsonSerializer .. not much point
+            // simple round-trip: here we're just testing ProtoBufSerializer .. not much point
 
-            var sut = new JsonSerializer(new JsonOptions());
+            var sut = new ProtoBufSerializer(new ProtoBufOptions());
             var expected = new TestClass {StringProperty = "string value"};
             var bytes = sut.Serialize(expected);
             var actual = sut.Deserialize(typeof(TestClass), bytes) as TestClass;
@@ -59,7 +48,7 @@ namespace Serialization.Json.Tests
             Assert.Equal(expected.StringProperty, actual.StringProperty);
         }
 
-        // ReSharper disable once MemberCanBePrivate.Global - JsonSerializer doesn't like that
+        // ReSharper disable once MemberCanBePrivate.Global - ProtoBufSerializer doesn't like that
         private class TestClass
         {
             public string StringProperty { get; set; }
