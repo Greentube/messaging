@@ -48,7 +48,7 @@ namespace Serialization.ProtoBuf.Tests
         }
 
         // ReSharper disable once MemberCanBePrivate.Global - ProtoBufSerializer doesn't like that
-        private class TestClass
+        public class TestClass
         {
             public string StringProperty { get; set; }
         }
