@@ -8,7 +8,7 @@ namespace Serialization.Json.Tests
         [Fact]
         public void Constructor_ThrowsOnNullArgument()
         {
-            Assert.Throws<ArgumentNullException>(() => new JsonConvertSerializer(null));
+            Assert.Throws<ArgumentNullException>(() => new JsonSerializer(null));
         }
     }
 }

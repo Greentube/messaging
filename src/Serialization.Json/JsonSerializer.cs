@@ -4,11 +4,11 @@ using Newtonsoft.Json;
 namespace Serialization.Json
 {
     /// <inheritdoc />
-    public class JsonConvertSerializer : ISerializer
+    public class JsonSerializer : ISerializer
     {
         private readonly JsonOptions _options;
 
-        public JsonConvertSerializer(JsonOptions options)
+        public JsonSerializer(JsonOptions options)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
         }

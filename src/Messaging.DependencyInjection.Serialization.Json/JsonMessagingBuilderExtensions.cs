@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static MessagingBuilder AddJson(this MessagingBuilder builder)
         {
-            builder.AddSerializer<JsonConvertSerializer>();
+            builder.AddSerializer<JsonSerializer>();
             builder.Services.AddSingleton(c => c.GetRequiredService<IOptions<JsonOptions>>().Value);
 
             return builder;

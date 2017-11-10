@@ -3,12 +3,12 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Serialization;
-using Serialization.Xml;
+using Serialization.Json;
 using Xunit;
 
-namespace Messaging.DependencyInjection.Serialization.Xml.Tests
+namespace Messaging.DependencyInjection.Serialization.Json.Tests
 {
-    public class XmlMessagingBuilderExtensionsTests
+    public class JsonMessagingBuilderExtensionsTests
     {
         class Fixture
         {
@@ -19,51 +19,52 @@ namespace Messaging.DependencyInjection.Serialization.Xml.Tests
         private readonly Fixture _fixture = new Fixture();
 
         [Fact]
-        public void AddXml_RegistersXmlSerializer()
+        public void AddJson_RegistersJsonSerializer()
         {
             // Arrange
             var builder = _fixture.GetBuilder();
 
             // Act
-            builder.AddXml();
+            builder.AddJson();
 
             // Assert
             var descriptor = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(ISerializer));
             Assert.NotNull(descriptor);
 
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
-            Assert.Equal(typeof(XmlSerializer), descriptor.ImplementationType);
+            Assert.Equal(typeof(JsonSerializer), descriptor.ImplementationType);
 
-            var xmlOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(XmlOptions));
-            Assert.NotNull(xmlOptions);
+            var JsonOptions =
+                _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(JsonOptions));
+            Assert.NotNull(JsonOptions);
         }
 
         [Fact]
-        public void AddXml_Action_RegistersXmlSerializer()
+        public void AddJson_Action_RegistersJsonSerializer()
         {
             // Arrange
             var builder = _fixture.GetBuilder();
             // ReSharper disable once ConvertToLocalFunction - Reference is needed for comparison
-            Action<XmlOptions> configAction = _ => { };
+            Action<JsonOptions> configAction = _ => { };
 
             // Act
-            builder.AddXml(configAction);
+            builder.AddJson(configAction);
 
             // Assert
             var optionsConfiguration =
-                _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(IConfigureOptions<XmlOptions>));
+                _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(IConfigureOptions<JsonOptions>));
 
             Assert.Same(configAction,
-                ((ConfigureNamedOptions<XmlOptions>) optionsConfiguration.ImplementationInstance).Action);
+                ((ConfigureNamedOptions<JsonOptions>) optionsConfiguration.ImplementationInstance).Action);
 
             var descriptor = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(ISerializer));
             Assert.NotNull(descriptor);
 
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
-            Assert.Equal(typeof(XmlSerializer), descriptor.ImplementationType);
+            Assert.Equal(typeof(JsonSerializer), descriptor.ImplementationType);
 
-            var xmlOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(XmlOptions));
-            Assert.NotNull(xmlOptions);
+            var JsonOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(JsonOptions));
+            Assert.NotNull(JsonOptions);
         }
     }
 }

@@ -3,12 +3,12 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Serialization;
-using Serialization.Xml;
+using Serialization.Protobuf;
 using Xunit;
 
-namespace Messaging.DependencyInjection.Serialization.Xml.Tests
+namespace Messaging.DependencyInjection.Serialization.ProtoBuf.Tests
 {
-    public class XmlMessagingBuilderExtensionsTests
+    public class ProtoBufMessagingBuilderExtensionsTests
     {
         class Fixture
         {
@@ -19,51 +19,52 @@ namespace Messaging.DependencyInjection.Serialization.Xml.Tests
         private readonly Fixture _fixture = new Fixture();
 
         [Fact]
-        public void AddXml_RegistersXmlSerializer()
+        public void AddProtoBuf_RegistersProtoBufSerializer()
         {
             // Arrange
             var builder = _fixture.GetBuilder();
 
             // Act
-            builder.AddXml();
+            builder.AddProtoBuf();
 
             // Assert
             var descriptor = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(ISerializer));
             Assert.NotNull(descriptor);
 
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
-            Assert.Equal(typeof(XmlSerializer), descriptor.ImplementationType);
+            Assert.Equal(typeof(ProtoBufSerializer), descriptor.ImplementationType);
 
-            var xmlOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(XmlOptions));
-            Assert.NotNull(xmlOptions);
+            var protoBufOptions =
+                _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(ProtoBufOptions));
+            Assert.NotNull(protoBufOptions);
         }
 
         [Fact]
-        public void AddXml_Action_RegistersXmlSerializer()
+        public void AddProtoBuf_Action_RegistersProtoBufSerializer()
         {
             // Arrange
             var builder = _fixture.GetBuilder();
             // ReSharper disable once ConvertToLocalFunction - Reference is needed for comparison
-            Action<XmlOptions> configAction = _ => { };
+            Action<ProtoBufOptions> configAction = _ => { };
 
             // Act
-            builder.AddXml(configAction);
+            builder.AddProtoBuf(configAction);
 
             // Assert
             var optionsConfiguration =
-                _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(IConfigureOptions<XmlOptions>));
+                _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(IConfigureOptions<ProtoBufOptions>));
 
             Assert.Same(configAction,
-                ((ConfigureNamedOptions<XmlOptions>) optionsConfiguration.ImplementationInstance).Action);
+                ((ConfigureNamedOptions<ProtoBufOptions>) optionsConfiguration.ImplementationInstance).Action);
 
             var descriptor = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(ISerializer));
             Assert.NotNull(descriptor);
 
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
-            Assert.Equal(typeof(XmlSerializer), descriptor.ImplementationType);
+            Assert.Equal(typeof(ProtoBufSerializer), descriptor.ImplementationType);
 
-            var xmlOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(XmlOptions));
-            Assert.NotNull(xmlOptions);
+            var protoBufOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(ProtoBufOptions));
+            Assert.NotNull(protoBufOptions);
         }
     }
 }
