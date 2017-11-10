@@ -8,6 +8,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Messaging.DependencyInjection\Messaging.DependencyInjection.csproj" />
-    <ProjectReference Include="..\Serialization.Protobuf\Serialization.Protobuf.csproj" />
+    <ProjectReference Include="..\Serialization.ProtoBuf\Serialization.ProtoBuf.csproj" />
   </ItemGroup>
 </Project>

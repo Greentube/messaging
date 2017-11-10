@@ -1,7 +1,7 @@
 ﻿using System;
 using Messaging.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Serialization.Protobuf;
+using Serialization.ProtoBuf;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

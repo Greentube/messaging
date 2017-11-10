@@ -27,8 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjecti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection.Serialization.Json", "src\Messaging.DependencyInjection.Serialization.Json\Messaging.DependencyInjection.Serialization.Json.csproj", "{B7A66C0A-6CE7-415A-8102-29EF0E88CB56}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection.Serialization.Protobuf", "src\Messaging.DependencyInjection.Serialization.Protobuf\Messaging.DependencyInjection.Serialization.Protobuf.csproj", "{B9AB9C4F-FE81-412A-9540-D3CB5A951976}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection.Serialization.Xml", "src\Messaging.DependencyInjection.Serialization.Xml\Messaging.DependencyInjection.Serialization.Xml.csproj", "{7D621A5B-5DC0-4F7E-A45E-0E0172111430}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.Kafka", "src\Messaging.Kafka\Messaging.Kafka.csproj", "{B0996A73-A7C4-439A-8ABB-10C5508E38FE}"
@@ -39,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization", "src\Serial
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization.Json", "src\Serialization.Json\Serialization.Json.csproj", "{9B8DF317-F117-450A-B6E7-32E0973FFC4E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization.Protobuf", "src\Serialization.Protobuf\Serialization.Protobuf.csproj", "{32A68DC4-33C9-4A71-8B7E-8D099343EBB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization.ProtoBuf", "src\Serialization.ProtoBuf\Serialization.ProtoBuf.csproj", "{32A68DC4-33C9-4A71-8B7E-8D099343EBB1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Serialization.Xml", "src\Serialization.Xml\Serialization.Xml.csproj", "{408C84D7-EC20-4110-BA9F-E9E653E2D763}"
 EndProject
@@ -77,6 +75,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjecti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messaging.DependencyInjection.Serialization.ProtoBuf.Tests", "test\Messaging.DependencyInjection.Serialization.ProtoBuf.Tests\Messaging.DependencyInjection.Serialization.ProtoBuf.Tests.csproj", "{616376C9-DFCA-460C-9D9E-F49C21152280}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messaging.DependencyInjection.Serialization.ProtoBuf", "src\Messaging.DependencyInjection.Serialization.ProtoBuf\Messaging.DependencyInjection.Serialization.ProtoBuf.csproj", "{C407716D-DE61-4656-9D4B-A6CE3CCAF1EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,10 +107,6 @@ Global
 		{B7A66C0A-6CE7-415A-8102-29EF0E88CB56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7A66C0A-6CE7-415A-8102-29EF0E88CB56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7A66C0A-6CE7-415A-8102-29EF0E88CB56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9AB9C4F-FE81-412A-9540-D3CB5A951976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9AB9C4F-FE81-412A-9540-D3CB5A951976}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9AB9C4F-FE81-412A-9540-D3CB5A951976}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9AB9C4F-FE81-412A-9540-D3CB5A951976}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7D621A5B-5DC0-4F7E-A45E-0E0172111430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7D621A5B-5DC0-4F7E-A45E-0E0172111430}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D621A5B-5DC0-4F7E-A45E-0E0172111430}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -203,6 +199,10 @@ Global
 		{616376C9-DFCA-460C-9D9E-F49C21152280}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{616376C9-DFCA-460C-9D9E-F49C21152280}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{616376C9-DFCA-460C-9D9E-F49C21152280}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C407716D-DE61-4656-9D4B-A6CE3CCAF1EF}.Debug|Any CPU.ActiveCfg = Coverage|Any CPU
+		{C407716D-DE61-4656-9D4B-A6CE3CCAF1EF}.Debug|Any CPU.Build.0 = Coverage|Any CPU
+		{C407716D-DE61-4656-9D4B-A6CE3CCAF1EF}.Release|Any CPU.ActiveCfg = Coverage|Any CPU
+		{C407716D-DE61-4656-9D4B-A6CE3CCAF1EF}.Release|Any CPU.Build.0 = Coverage|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -214,7 +214,6 @@ Global
 		{293B140B-060A-437A-A0E5-8470958DB094} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{9256485D-ACE3-4B8B-B542-A320D18D1B54} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{B7A66C0A-6CE7-415A-8102-29EF0E88CB56} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
-		{B9AB9C4F-FE81-412A-9540-D3CB5A951976} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{7D621A5B-5DC0-4F7E-A45E-0E0172111430} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{B0996A73-A7C4-439A-8ABB-10C5508E38FE} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{A69AFF09-CBD4-4D6F-9783-389D3A9A512C} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
@@ -238,6 +237,7 @@ Global
 		{7F092496-EC35-4A48-A844-DB2ED7CAD3C5} = {454C1E74-61F0-4E54-9ABA-9BD1711B5A83}
 		{DA424882-0DA9-42AA-9AC7-D7347FD53A1A} = {454C1E74-61F0-4E54-9ABA-9BD1711B5A83}
 		{616376C9-DFCA-460C-9D9E-F49C21152280} = {454C1E74-61F0-4E54-9ABA-9BD1711B5A83}
+		{C407716D-DE61-4656-9D4B-A6CE3CCAF1EF} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECC8E5D6-3F47-4B40-A007-E12C770C9F45}

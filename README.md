@@ -73,7 +73,7 @@ The supported serialization methods are:
 
 * JSON - with Newtonsoft.Json
 * XML - with System.Xml.XmlSerializer
-* Protobuf - with protobuf-net
+* ProtoBuf - with protobuf-net
 
 Example serialization setup:
 
@@ -111,7 +111,7 @@ Xml with user-defined factory delegate
 builder.AddXml(p => p.Factory = type => new XmlSerializer(type, new XmlRootAttribute("messaging")));
 ```
 
-##### Protobuf
+##### ProtoBuf
 
 Custom RuntimeTypeModel
 ```csharp

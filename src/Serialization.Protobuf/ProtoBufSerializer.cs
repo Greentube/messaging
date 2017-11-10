@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Serialization.Protobuf
+namespace Serialization.ProtoBuf
 {
     /// <inheritdoc />
     public class ProtoBufSerializer : ISerializer

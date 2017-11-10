@@ -1,6 +1,6 @@
 ﻿using ProtoBuf.Meta;
 
-namespace Serialization.Protobuf
+namespace Serialization.ProtoBuf
 {
     public class ProtoBufOptions
     {

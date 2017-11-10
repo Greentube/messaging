@@ -15,9 +15,9 @@
     <ProjectReference Include="..\Messaging.DependencyInjection.Kafka\Messaging.DependencyInjection.Kafka.csproj" />
     <ProjectReference Include="..\Serialization\Serialization.csproj" />
     <ProjectReference Include="..\Serialization.Json\Serialization.Json.csproj" />
-    <ProjectReference Include="..\Serialization.Protobuf\Serialization.Protobuf.csproj" />
+    <ProjectReference Include="..\Serialization.ProtoBuf\Serialization.ProtoBuf.csproj" />
     <ProjectReference Include="..\Serialization.Xml\Serialization.Xml.csproj" />
-    <ProjectReference Include="..\Messaging.DependencyInjection.Serialization.Protobuf\Messaging.DependencyInjection.Serialization.Protobuf.csproj" />
+    <ProjectReference Include="..\Messaging.DependencyInjection.Serialization.ProtoBuf\Messaging.DependencyInjection.Serialization.ProtoBuf.csproj" />
     <ProjectReference Include="..\Messaging.DependencyInjection.Serialization.Json\Messaging.DependencyInjection.Serialization.Json.csproj" />
     <ProjectReference Include="..\Messaging.DependencyInjection.Serialization.Xml\Messaging.DependencyInjection.Serialization.Xml.csproj" />
   </ItemGroup>

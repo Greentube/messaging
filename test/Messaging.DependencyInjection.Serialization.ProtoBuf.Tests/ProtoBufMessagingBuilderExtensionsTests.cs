@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Serialization;
-using Serialization.Protobuf;
+using Serialization.ProtoBuf;
 using Xunit;
 
 namespace Messaging.DependencyInjection.Serialization.ProtoBuf.Tests

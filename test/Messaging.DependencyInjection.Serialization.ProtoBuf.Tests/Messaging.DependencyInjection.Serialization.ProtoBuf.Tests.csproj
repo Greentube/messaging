@@ -10,6 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Messaging.DependencyInjection.Serialization.ProtoBuf\Messaging.DependencyInjection.Serialization.ProtoBuf.csproj" />
-    <ProjectReference Include="..\..\src\Serialization.ProtoBuf\Serialization.ProtoBuf.csproj" />
   </ItemGroup>
 </Project>
