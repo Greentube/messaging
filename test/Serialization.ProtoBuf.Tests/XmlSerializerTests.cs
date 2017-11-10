@@ -1,4 +1,5 @@
 ﻿using System;
+using ProtoBuf;
 using Xunit;
 
 namespace Serialization.ProtoBuf.Tests
@@ -48,8 +49,10 @@ namespace Serialization.ProtoBuf.Tests
         }
 
         // ReSharper disable once MemberCanBePrivate.Global - ProtoBufSerializer doesn't like that
+        [ProtoContract]
         public class TestClass
         {
+            [ProtoMember(1)]
             public string StringProperty { get; set; }
         }
     }
