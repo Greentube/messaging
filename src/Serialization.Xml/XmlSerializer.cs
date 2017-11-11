@@ -7,6 +7,7 @@ namespace Serialization.Xml
     /// <summary>
     /// XML Serialization
     /// </summary>
+    /// <inheritdoc />
     public class XmlSerializer : ISerializer
     {
         private readonly XmlOptions _options;

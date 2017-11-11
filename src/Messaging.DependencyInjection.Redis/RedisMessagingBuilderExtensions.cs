@@ -3,6 +3,7 @@ using Messaging.Redis;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using StackExchange.Redis;
 
+// ReSharper disable once CheckNamespace - Discoverability
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class RedisMessagingBuilderExtensions

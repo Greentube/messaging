@@ -3,6 +3,7 @@ using Messaging.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Serialization.Json;
 
+// ReSharper disable once CheckNamespace - Discoverability
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class JsonMessagingBuilderExtensions

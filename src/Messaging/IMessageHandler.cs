@@ -7,6 +7,7 @@ namespace Messaging
     /// Handles a message of type <typeparam name="TMessage"></typeparam>
     /// </summary>
     /// <typeparam name="TMessage"></typeparam>
+    /// <inheritdoc />
     public interface IMessageHandler<in TMessage> : IMessageHandler
     {
         /// <summary>

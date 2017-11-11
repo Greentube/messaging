@@ -9,6 +9,7 @@ namespace Messaging.Redis
     /// <summary>
     /// A Redis Raw Message Handler Subscriber
     /// </summary>
+    /// <inheritdoc />
     public class RedisRawMessageHandlerSubscriber : IRawMessageHandlerSubscriber
     {
         private readonly IConnectionMultiplexer _mux;
@@ -23,6 +24,7 @@ namespace Messaging.Redis
         /// <param name="rawHandler"></param>
         /// <param name="_"></param>
         /// <returns></returns>
+        /// <inheritdoc />
         public Task Subscribe(string topic, IRawMessageHandler rawHandler, CancellationToken _)
         {
             void HandleRedisMessage(RedisChannel channel, RedisValue value) =>

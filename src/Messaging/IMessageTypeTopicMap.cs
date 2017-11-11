@@ -6,6 +6,7 @@ namespace Messaging
     /// <summary>
     /// Map of message type and correspondent topic
     /// </summary>
+    /// <inheritdoc />
     public interface IMessageTypeTopicMap : IReadOnlyCollection<KeyValuePair<Type, string>>
     {
         /// <summary>

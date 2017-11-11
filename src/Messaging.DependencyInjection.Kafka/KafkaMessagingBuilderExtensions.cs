@@ -4,6 +4,7 @@ using Messaging.Kafka;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
+// ReSharper disable once CheckNamespace - Discoverability
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class KafkaMessagingBuilderExtensions

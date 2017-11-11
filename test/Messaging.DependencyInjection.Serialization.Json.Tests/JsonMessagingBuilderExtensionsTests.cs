@@ -34,9 +34,9 @@ namespace Messaging.DependencyInjection.Serialization.Json.Tests
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
             Assert.Equal(typeof(JsonSerializer), descriptor.ImplementationType);
 
-            var JsonOptions =
+            var jsonOptions =
                 _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(JsonOptions));
-            Assert.NotNull(JsonOptions);
+            Assert.NotNull(jsonOptions);
         }
 
         [Fact]
@@ -54,6 +54,7 @@ namespace Messaging.DependencyInjection.Serialization.Json.Tests
             var optionsConfiguration =
                 _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(IConfigureOptions<JsonOptions>));
 
+            Assert.NotNull(optionsConfiguration);
             Assert.Same(configAction,
                 ((ConfigureNamedOptions<JsonOptions>) optionsConfiguration.ImplementationInstance).Action);
 
@@ -63,8 +64,8 @@ namespace Messaging.DependencyInjection.Serialization.Json.Tests
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
             Assert.Equal(typeof(JsonSerializer), descriptor.ImplementationType);
 
-            var JsonOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(JsonOptions));
-            Assert.NotNull(JsonOptions);
+            var jsonOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(JsonOptions));
+            Assert.NotNull(jsonOptions);
         }
     }
 }

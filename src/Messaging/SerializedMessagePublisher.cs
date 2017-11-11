@@ -8,6 +8,7 @@ namespace Messaging
     /// <summary>
     /// Publishes a serialized message via raw publisher
     /// </summary>
+    /// <inheritdoc />
     public class SerializedMessagePublisher : IMessagePublisher
     {
         private readonly IMessageTypeTopicMap _typeTopicMap;

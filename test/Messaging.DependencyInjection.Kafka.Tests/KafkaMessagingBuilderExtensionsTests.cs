@@ -62,7 +62,7 @@ namespace Messaging.DependencyInjection.Kafka.Tests
             // Assert
             AssertPublisher();
             AssertOptions();
-            Assert.False(_fixture.ServiceCollection.Any(d => d.ServiceType == typeof(IRawMessageHandlerSubscriber)));
+            Assert.DoesNotContain(_fixture.ServiceCollection, d => d.ServiceType == typeof(IRawMessageHandlerSubscriber));
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace Messaging.DependencyInjection.Kafka.Tests
             AssertOptionSetup(configAction);
             AssertPublisher();
             AssertOptions();
-            Assert.False(_fixture.ServiceCollection.Any(d => d.ServiceType == typeof(IRawMessageHandlerSubscriber)));
+            Assert.DoesNotContain(_fixture.ServiceCollection, d => d.ServiceType == typeof(IRawMessageHandlerSubscriber));
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace Messaging.DependencyInjection.Kafka.Tests
             // Assert
             AssertOptions();
             AssertSubscriber();
-            Assert.False(_fixture.ServiceCollection.Any(d => d.ServiceType == typeof(IRawMessagePublisher)));
+            Assert.DoesNotContain(_fixture.ServiceCollection, d => d.ServiceType == typeof(IRawMessagePublisher));
         }
 
         [Fact]
@@ -113,7 +113,7 @@ namespace Messaging.DependencyInjection.Kafka.Tests
             AssertOptionSetup(configAction);
             AssertSubscriber();
             AssertOptions();
-            Assert.False(_fixture.ServiceCollection.Any(d => d.ServiceType == typeof(IRawMessagePublisher)));
+            Assert.DoesNotContain(_fixture.ServiceCollection, d => d.ServiceType == typeof(IRawMessagePublisher));
         }
 
         private void AssertSubscriber()
@@ -143,10 +143,13 @@ namespace Messaging.DependencyInjection.Kafka.Tests
             Assert.NotNull(options);
         }
 
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private void AssertOptionSetup(Action<KafkaOptions> configAction)
         {
             var optionsConfiguration =
                 _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(IConfigureOptions<KafkaOptions>));
+
+            Assert.NotNull(optionsConfiguration);
             Assert.Same(configAction,
                 ((ConfigureNamedOptions<KafkaOptions>) optionsConfiguration.ImplementationInstance).Action);
         }

@@ -59,7 +59,6 @@ namespace Serialization.Json.Tests
             Assert.Equal(expected.StringProperty, actual.StringProperty);
         }
 
-        // ReSharper disable once MemberCanBePrivate.Global - JsonSerializer doesn't like that
         private class TestClass
         {
             public string StringProperty { get; set; }

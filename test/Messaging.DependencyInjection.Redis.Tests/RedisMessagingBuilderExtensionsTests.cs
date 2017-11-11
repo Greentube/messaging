@@ -64,7 +64,7 @@ namespace Messaging.DependencyInjection.Redis.Tests
 
             // Assert
             AssertPublisher();
-            Assert.False(_fixture.ServiceCollection.Any(d => d.ServiceType == typeof(IRawMessageHandlerSubscriber)));
+            Assert.DoesNotContain(_fixture.ServiceCollection, d => d.ServiceType == typeof(IRawMessageHandlerSubscriber));
         }
 
         [Fact]
@@ -78,7 +78,7 @@ namespace Messaging.DependencyInjection.Redis.Tests
 
             // Assert
             AssertSubscriber();
-            Assert.False(_fixture.ServiceCollection.Any(d => d.ServiceType == typeof(IRawMessagePublisher)));
+            Assert.DoesNotContain(_fixture.ServiceCollection, d => d.ServiceType == typeof(IRawMessagePublisher));
         }
 
 

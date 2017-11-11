@@ -271,6 +271,7 @@ namespace Messaging.DependencyInjection.Tests
                 .AddTopic<MessagingBuilderTests>(nameof(MessagingBuilderTests));
         }
 
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private void AssertRequiredServices(IServiceCollection s, bool publishing, bool subscribing)
         {
             // Services required by the Messaging package:

@@ -53,6 +53,7 @@ namespace Messaging.DependencyInjection.Serialization.Xml.Tests
             var optionsConfiguration =
                 _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(IConfigureOptions<XmlOptions>));
 
+            Assert.NotNull(optionsConfiguration);
             Assert.Same(configAction,
                 ((ConfigureNamedOptions<XmlOptions>) optionsConfiguration.ImplementationInstance).Action);
 

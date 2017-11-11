@@ -1,6 +1,7 @@
 ﻿using System;
 using Messaging.DependencyInjection;
 
+// ReSharper disable once CheckNamespace - Discoverability
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class MessagingServiceCollectionExtensions

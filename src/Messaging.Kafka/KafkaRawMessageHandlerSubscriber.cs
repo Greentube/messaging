@@ -10,6 +10,8 @@ namespace Messaging.Kafka
     /// <summary>
     /// A Kafka Raw Message Handler Subscriber
     /// </summary>
+    /// <inheritdoc cref="IRawMessageHandlerSubscriber" />
+    /// <inheritdoc cref="IDisposable" />
     public class KafkaRawMessageHandlerSubscriber : IRawMessageHandlerSubscriber, IDisposable
     {
         private readonly ConcurrentDictionary<string,
@@ -32,7 +34,8 @@ namespace Messaging.Kafka
         /// <param name="topic">The topic to subscribe to</param>
         /// <param name="rawHandler">The raw handler to invoke with the bytes received</param>
         /// <param name="subscriptionCancellation">A token to cancel the topic subscription</param>
-        /// <returns></returns>
+        /// <returns>Task that completes when the subscription process is finished</returns>
+        /// <inheritdoc />
         public Task Subscribe(string topic, IRawMessageHandler rawHandler, CancellationToken subscriptionCancellation)
         {
             var subscriptionTask = new TaskCompletionSource<bool>();
@@ -150,6 +153,7 @@ namespace Messaging.Kafka
                 }
                 catch // CA1065
                 {
+                    // ignored
                 }
             }
         }

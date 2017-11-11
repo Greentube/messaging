@@ -11,6 +11,7 @@ namespace Messaging
     /// <summary>
     /// Provider of type information for <see cref="IMessageHandler"/> implementations
     /// </summary>
+    /// <inheritdoc />
     public class MessageHandlerInfoProvider : IMessageHandlerInfoProvider
     {
         private readonly IMessageTypeTopicMap _typeTopicMap;

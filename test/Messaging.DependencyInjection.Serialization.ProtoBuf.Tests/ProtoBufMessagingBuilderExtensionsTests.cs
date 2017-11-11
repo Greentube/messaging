@@ -54,6 +54,7 @@ namespace Messaging.DependencyInjection.Serialization.ProtoBuf.Tests
             var optionsConfiguration =
                 _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(IConfigureOptions<ProtoBufOptions>));
 
+            Assert.NotNull(optionsConfiguration);
             Assert.Same(configAction,
                 ((ConfigureNamedOptions<ProtoBufOptions>) optionsConfiguration.ImplementationInstance).Action);
 

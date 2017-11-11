@@ -8,6 +8,7 @@ namespace Messaging.Redis
     /// <summary>
     /// A Redis Raw Message Publisher
     /// </summary>
+    /// <inheritdoc />
     public class RedisRawMessagePublisher : IRawMessagePublisher
     {
         private readonly ISubscriber _subscriber;
@@ -22,6 +23,7 @@ namespace Messaging.Redis
         /// <param name="message"></param>
         /// <param name="_"></param>
         /// <returns></returns>
+        /// <inheritdoc />
         public Task Publish(string topic, byte[] message, CancellationToken _)
         {
             return _subscriber.PublishAsync(topic, message);

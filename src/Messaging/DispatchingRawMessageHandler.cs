@@ -8,6 +8,7 @@ namespace Messaging
     /// <summary>
     /// Handles raw messages by deserializing them and dispatching with using <see cref="IMessageHandlerInvoker"/>
     /// </summary>
+    /// <inheritdoc />
     public class DispatchingRawMessageHandler : IRawMessageHandler
     {
         private readonly IMessageHandlerInvoker _messageHandlerInvoker;

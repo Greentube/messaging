@@ -9,6 +9,8 @@ namespace Messaging.Kafka
     /// <summary>
     /// A Kafka Raw Message Publisher
     /// </summary>
+    /// <inheritdoc cref="IRawMessagePublisher" />
+    /// <inheritdoc cref="IDisposable" />
     public class KafkaRawMessagePublisher : IRawMessagePublisher, IDisposable
     {
         private readonly KafkaOptions _options;
@@ -29,6 +31,7 @@ namespace Messaging.Kafka
         /// <param name="message"></param>
         /// <param name="token"></param>
         /// <returns></returns>
+        /// <inheritdoc />
         public Task Publish(string topic, byte[] message, CancellationToken token)
         {
             return _producer.ProduceAsync(topic, null, message);
@@ -42,6 +45,7 @@ namespace Messaging.Kafka
         /// <summary>
         /// Flushes the Producer data with the <see cref="KafkaOptions"/> timeout and disposes it.
         /// </summary>
+        /// <inheritdoc />
         public void Dispose()
         {
             _producer.Flush(_options.Publisher.FlushTimeout);

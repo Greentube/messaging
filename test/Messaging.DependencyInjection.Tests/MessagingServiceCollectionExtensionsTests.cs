@@ -69,6 +69,7 @@ namespace Messaging.DependencyInjection.Tests
             AssertMessagingBuilt(s);
         }
 
+        // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local
         private static void AssertMessagingBuilt(ServiceCollection s)
         {
             // Services required to be provided by the caller of AddMessaging:

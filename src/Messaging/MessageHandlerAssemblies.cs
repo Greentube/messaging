@@ -7,6 +7,7 @@ namespace Messaging
     /// <summary>
     /// A list of assemblies to search for implementations of <see cref="IMessageHandler"/>
     /// </summary>
+    /// <inheritdoc />
     public class MessageHandlerAssemblies : IEnumerable<Assembly>
     {
         private readonly HashSet<Assembly> _asms = new HashSet<Assembly>();
