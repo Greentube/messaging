@@ -28,6 +28,8 @@ namespace Messaging
         ///<inheritdoc />
         public Task Publish<TMessage>(TMessage message, CancellationToken token)
         {
+            if (message == null) throw new ArgumentNullException(nameof(message));
+
             var topic = _typeTopicMap.Get(message.GetType());
             if (topic == null)
             {
