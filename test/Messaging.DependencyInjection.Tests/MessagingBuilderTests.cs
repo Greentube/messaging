@@ -293,7 +293,6 @@ namespace Messaging.DependencyInjection.Tests
                 // Provided by the application code
                 Assert.Equal(1, s.Count(d => d.ServiceType == typeof(IRawMessageHandlerSubscriber)));
                 // Provided by the builder
-                Assert.Equal(1, s.Count(d => d.ServiceType == typeof(MessageHandlerAssemblies)));
                 Assert.Equal(1, s.Count(d => d.ServiceType == typeof(IRawMessageHandler)));
                 Assert.Equal(1, s.Count(d => d.ServiceType == typeof(IMessageHandlerInfoProvider)));
             }

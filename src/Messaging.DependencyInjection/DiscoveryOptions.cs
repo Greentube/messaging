@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Scrutor;
 
@@ -15,7 +16,7 @@ namespace Messaging.DependencyInjection
         /// <summary>
         /// Assemblies to scan for implementations of <see cref="IMessageHandler"/>
         /// </summary>
-        public MessageHandlerAssemblies MessageHandlerAssemblies { get; } = new MessageHandlerAssemblies
+        public ISet<Assembly> MessageHandlerAssemblies { get; } = new HashSet<Assembly>
         {
             Assembly.GetEntryAssembly()
         };

@@ -48,6 +48,7 @@ namespace Messaging.DependencyInjection
         public MessagingBuilder AddTopic<TMessage>(string topic)
         {
             _messageTypeTopic.Add(typeof(TMessage), topic);
+            _discoverySettings.MessageHandlerAssemblies.Add(typeof(TMessage).Assembly);
             return this;
         }
 
@@ -59,9 +60,6 @@ namespace Messaging.DependencyInjection
 
         private void AddHandlerDiscovery()
         {
-            // Look also on assemblies where there are Message types:
-            _discoverySettings.MessageHandlerAssemblies.AddRange(_messageTypeTopic.Select(t => t.Key.Assembly).Distinct());
-
             Services.Scan(s =>
                 s.FromAssemblies(_discoverySettings.MessageHandlerAssemblies)
                     .AddClasses(f => f.AssignableTo(typeof(IMessageHandler<>)), !_discoverySettings.IncludeNonPublic)
