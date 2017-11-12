@@ -276,25 +276,25 @@ namespace Messaging.DependencyInjection.Tests
         {
             // Services required by the Messaging package:
             // Provided by the application code
-            Assert.Equal(1, s.Count(d => d.ServiceType == typeof(ISerializer)));
-            Assert.Equal(1, s.Count(d => d.ServiceType == typeof(IMessageTypeTopicMap)));
+            Assert.Single(s, d => d.ServiceType == typeof(ISerializer));
+            Assert.Single(s, d => d.ServiceType == typeof(IMessageTypeTopicMap));
             // Provided by the builder
-            Assert.Equal(1, s.Count(d => d.ServiceType == typeof(MessagingOptions)));
+            Assert.Single(s, d => d.ServiceType == typeof(MessagingOptions));
 
             if (publishing)
             {
                 // Provided by the application code
-                Assert.Equal(1, s.Count(d => d.ServiceType == typeof(IRawMessagePublisher)));
+                Assert.Single(s, d => d.ServiceType == typeof(IRawMessagePublisher));
                 // Provided by the builder
-                Assert.Equal(1, s.Count(d => d.ServiceType == typeof(IMessagePublisher)));
+                Assert.Single(s, d => d.ServiceType == typeof(IMessagePublisher));
             }
             if (subscribing)
             {
                 // Provided by the application code
-                Assert.Equal(1, s.Count(d => d.ServiceType == typeof(IRawMessageHandlerSubscriber)));
+                Assert.Single(s, d => d.ServiceType == typeof(IRawMessageHandlerSubscriber));
                 // Provided by the builder
-                Assert.Equal(1, s.Count(d => d.ServiceType == typeof(IRawMessageHandler)));
-                Assert.Equal(1, s.Count(d => d.ServiceType == typeof(IMessageHandlerInfoProvider)));
+                Assert.Single(s, d => d.ServiceType == typeof(IRawMessageHandler));
+                Assert.Single(s, d => d.ServiceType == typeof(IMessageHandlerInfoProvider));
             }
         }
     }
