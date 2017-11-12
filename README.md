@@ -71,10 +71,12 @@ The current supported messaging systems are:
 #### Serialization
 The supported serialization methods are:
 
-* JSON - with Newtonsoft.Json
-* XML - with System.Xml.XmlSerializer
-* ProtoBuf - with protobuf-net
+* MessagePack - with [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp)
+* ProtoBuf - with [protobuf-net](https://github.com/mgravell/protobuf-net)
+* JSON - with [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
+* XML - with [System.Xml.XmlSerializer](https://github.com/dotnet/corefx/tree/master/src/System.Xml.XmlSerializer)
 
+All of the above can be 'plugged-in' with a single line when using the Messaging.DependencyInjection.* packages.
 Example serialization setup:
 
 ```csharp
@@ -89,6 +91,29 @@ services.AddMessaging(builder =>
 ```
 
 Each implementation has some additional settings
+
+#### MessagePack
+
+Define a custom IFormatterResolver and compressiong LZ4:
+
+```csharp
+
+builder.AddMessagePack(o => {
+    // Don't require attributes on model
+    o.FormatterResolver = global::MessagePack.Resolvers.ContractlessStandardResolver.Instance;
+    // Use LZ4 compression
+    o.UseLz4Compression = true;
+});
+```
+
+##### ProtoBuf
+
+Custom RuntimeTypeModel
+```csharp
+var model = RuntimeTypeModel.Create();
+model.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
+builder.AddProtoBuf(o => o.RuntimeTypeModel = runtimeTypeModel);
+```
 
 ##### JSON
 
@@ -109,15 +134,6 @@ Xml with user-defined factory delegate
 ```csharp 
 // Root attribute will be named: 'messaging'
 builder.AddXml(p => p.Factory = type => new XmlSerializer(type, new XmlRootAttribute("messaging")));
-```
-
-##### ProtoBuf
-
-Custom RuntimeTypeModel
-```csharp
-var model = RuntimeTypeModel.Create();
-model.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
-builder.AddProtoBuf(o => o.RuntimeTypeModel = runtimeTypeModel);
 ```
 
 #### Discovering and Invoking handlers

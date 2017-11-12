@@ -6,4 +6,5 @@
 [assembly: InternalsVisibleTo("Messaging.DependencyInjection.Serialization.Json.Tests")]
 [assembly: InternalsVisibleTo("Messaging.DependencyInjection.Serialization.ProtoBuf.Tests")]
 [assembly: InternalsVisibleTo("Messaging.DependencyInjection.Serialization.Xml.Tests")]
+[assembly: InternalsVisibleTo("Messaging.DependencyInjection.Serialization.MessagePack.Tests")]
 [assembly: InternalsVisibleTo("Messaging.DependencyInjection.Serialization.Tests")]

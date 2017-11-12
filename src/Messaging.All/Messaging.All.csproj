@@ -17,8 +17,10 @@
     <ProjectReference Include="..\Serialization.Json\Serialization.Json.csproj" />
     <ProjectReference Include="..\Serialization.ProtoBuf\Serialization.ProtoBuf.csproj" />
     <ProjectReference Include="..\Serialization.Xml\Serialization.Xml.csproj" />
+    <ProjectReference Include="..\Serialization.MessagePack\Serialization.MessagePack.csproj" />
     <ProjectReference Include="..\Messaging.DependencyInjection.Serialization.ProtoBuf\Messaging.DependencyInjection.Serialization.ProtoBuf.csproj" />
     <ProjectReference Include="..\Messaging.DependencyInjection.Serialization.Json\Messaging.DependencyInjection.Serialization.Json.csproj" />
     <ProjectReference Include="..\Messaging.DependencyInjection.Serialization.Xml\Messaging.DependencyInjection.Serialization.Xml.csproj" />
+    <ProjectReference Include="..\Messaging.DependencyInjection.Serialization.MessagePack\Messaging.DependencyInjection.Serialization.MessagePack.csproj" />
   </ItemGroup>
 </Project>
