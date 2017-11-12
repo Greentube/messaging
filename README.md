@@ -71,9 +71,10 @@ The current supported messaging systems are:
 #### Serialization
 The supported serialization methods are:
 
-* JSON - with Newtonsoft.Json
-* XML - with System.Xml.XmlSerializer
-* ProtoBuf - with protobuf-net
+* JSON - with [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
+* XML - with [System.Xml.XmlSerializer](https://github.com/dotnet/corefx/tree/master/src/System.Xml.XmlSerializer)
+* ProtoBuf - with [protobuf-net](https://github.com/mgravell/protobuf-net)
+* MessagePack - with [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp)
 
 Example serialization setup:
 
@@ -89,6 +90,20 @@ services.AddMessaging(builder =>
 ```
 
 Each implementation has some additional settings
+
+#### MessagePack
+
+Define a custom IFormatterResolver and compressiong LZ4:
+
+```csharp
+
+builder.AddMessagePack(o => {
+    // Don't require attributes on model
+    o.IFormatterResolver = global::MessagePack.Resolvers.ContractlessStandardResolver.Instance;
+    // Use LZ4 compression
+    o.UseLz4Compression = true;
+});
+```
 
 ##### JSON
 
