@@ -4,14 +4,11 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.0.0-rc1" />
-    <PackageReference Include="AutoFixture.Xunit2" Version="4.0.0-rc1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
-    <PackageReference Include="NSubstitute" Version="3.1.0" />
-    <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Messaging\Messaging.csproj" />
+    <ProjectReference Include="..\Messaging.Testing\Messaging.Testing.csproj" />
   </ItemGroup>
 </Project>

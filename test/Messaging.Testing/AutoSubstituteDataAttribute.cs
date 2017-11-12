@@ -2,7 +2,8 @@ using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using AutoFixture.Xunit2;
 
-namespace Messaging.Tests
+// ReSharper disable once CheckNamespace - discoverability
+namespace Messaging
 {
     public class AutoSubstituteDataAttribute : AutoDataAttribute
     {
