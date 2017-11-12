@@ -12,10 +12,10 @@ namespace Messaging.Redis
     /// <inheritdoc />
     public class RedisRawMessageHandlerSubscriber : IRawMessageHandlerSubscriber
     {
-        private readonly IConnectionMultiplexer _mux;
+        private readonly IConnectionMultiplexer _connectionMultiplexer;
 
-        public RedisRawMessageHandlerSubscriber(IConnectionMultiplexer mux) =>
-            _mux = mux ?? throw new ArgumentNullException(nameof(mux));
+        public RedisRawMessageHandlerSubscriber(IConnectionMultiplexer connectionMultiplexer) =>
+            _connectionMultiplexer = connectionMultiplexer ?? throw new ArgumentNullException(nameof(connectionMultiplexer));
 
         /// <summary>
         /// Subscribes to the specified topic with Redis Pub/Sub
@@ -27,12 +27,17 @@ namespace Messaging.Redis
         /// <inheritdoc />
         public Task Subscribe(string topic, IRawMessageHandler rawHandler, CancellationToken _)
         {
+            if (topic == null) throw new ArgumentNullException(nameof(topic));
+            if (rawHandler == null) throw new ArgumentNullException(nameof(rawHandler));
+
             void HandleRedisMessage(RedisChannel channel, RedisValue value) =>
                 rawHandler.Handle(channel, value, None)
                     .GetAwaiter()
                     .GetResult();
 
-            var subscriber = _mux.GetSubscriber();
+            var subscriber = _connectionMultiplexer.GetSubscriber()
+                ?? throw new InvalidOperationException("Redis Multiplexer returned no subscription.");
+
             return subscriber.SubscribeAsync(topic, HandleRedisMessage);
         }
     }
