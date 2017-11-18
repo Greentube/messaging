@@ -82,17 +82,19 @@ Example serialization setup:
 ```csharp
 services.AddMessaging(builder =>
 {
+    builder.AddMessagePack();
+    // or
     builder.AddProtoBuf();
     // or
-    builder.AddXml();
-    // or
     builder.AddJson();
+    // or
+    builder.AddXml();
 });
 ```
 
 Each implementation has some additional settings
 
-#### MessagePack
+##### MessagePack
 
 Define a custom IFormatterResolver and compressiong LZ4:
 

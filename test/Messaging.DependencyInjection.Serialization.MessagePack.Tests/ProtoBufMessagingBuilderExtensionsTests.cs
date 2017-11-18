@@ -34,9 +34,9 @@ namespace Messaging.DependencyInjection.Serialization.MessagePack.Tests
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
             Assert.Equal(typeof(MessagePackSerializer), descriptor.ImplementationType);
 
-            var MessagePackOptions =
+            var messagePackOptions =
                 _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(MessagePackOptions));
-            Assert.NotNull(MessagePackOptions);
+            Assert.NotNull(messagePackOptions);
         }
 
         [Fact]
@@ -64,8 +64,8 @@ namespace Messaging.DependencyInjection.Serialization.MessagePack.Tests
             Assert.Equal(ServiceLifetime.Singleton, descriptor.Lifetime);
             Assert.Equal(typeof(MessagePackSerializer), descriptor.ImplementationType);
 
-            var MessagePackOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(MessagePackOptions));
-            Assert.NotNull(MessagePackOptions);
+            var messagePackOptions = _fixture.ServiceCollection.FirstOrDefault(d => d.ServiceType == typeof(MessagePackOptions));
+            Assert.NotNull(messagePackOptions);
         }
     }
 }

@@ -14,25 +14,45 @@ namespace Messaging.Kafka
     public class KafkaRawMessagePublisher : IRawMessagePublisher, IDisposable
     {
         private readonly KafkaOptions _options;
-        private readonly Producer<Null, byte[]> _producer;
+        private readonly IKafkaProducer _producer;
         private static readonly ByteArraySerializer Serializer = new ByteArraySerializer();
 
+        /// <summary>
+        /// Creates a new instance of <see cref="KafkaRawMessagePublisher"/>
+        /// </summary>
+        /// <param name="options"></param>
         public KafkaRawMessagePublisher(KafkaOptions options)
+            : this(
+                  () => new KafkaProducerAdapter(
+                      new Producer<Null, byte[]>(options.Properties, null, Serializer)),
+                  options) { }
+
+        internal KafkaRawMessagePublisher(
+            Func<IKafkaProducer> producerFunc,
+            KafkaOptions options)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
-            _producer = new Producer<Null, byte[]>(options.Properties, null, Serializer);
-            _options.Publisher.ProducerCreatedCallback?.Invoke(_producer);
+            var producer = producerFunc();
+            try
+            {
+                _options.Publisher.ProducerCreatedCallback?.Invoke(producer.KafkaProducer);
+            }
+            catch
+            {
+                producer.Dispose();
+                throw;
+            }
+            _producer = producer;
         }
 
         /// <summary>
         /// Publishes the raw message to the topic using Kafka Producer
         /// </summary>
-        /// <param name="topic"></param>
-        /// <param name="message"></param>
-        /// <param name="token"></param>
-        /// <returns></returns>
+        /// <param name="topic">The topic to send the message to.</param>
+        /// <param name="message">The message to send.</param>
+        /// <param name="_">The ignored cancellation token due to the implementation not supporting.</param>
         /// <inheritdoc />
-        public Task Publish(string topic, byte[] message, CancellationToken token)
+        public Task Publish(string topic, byte[] message, CancellationToken _)
         {
             return _producer.ProduceAsync(topic, null, message);
         }

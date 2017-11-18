@@ -51,6 +51,18 @@ namespace Messaging.Tests
         }
 
         [Fact]
+        public void Get_NullType_ThrowsArgumentNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _sut.Get((Type)null));
+        }
+
+        [Fact]
+        public void Get_NullTopic_ThrowsArgumentNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => _sut.Get((string)null));
+        }
+
+        [Fact]
         public void Add_NoDuplicates()
         {
             _sut.Add(GetType(), GetType().FullName);
@@ -94,5 +106,17 @@ namespace Messaging.Tests
             Assert.Equal(new KeyValuePair<Type, string>(GetType(), GetType().FullName), enumerator.Current);
             Assert.False(enumerator.MoveNext());
         }
+
+#pragma warning disable xUnit2013 // Do not use equality check to check for collection size. - Let me test a call to Count?
+        [Fact]
+        public void Count_StartsAtZero() => Assert.Equal(0, _sut.Count);
+
+        [Fact]
+        public void Count_ReflectsAddCount()
+        {
+            _sut.Add(GetType(), GetType().FullName);
+            Assert.Equal(1, _sut.Count);
+        }
+#pragma warning restore xUnit2013 // Do not use equality check to check for collection size.
     }
 }

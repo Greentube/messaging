@@ -7,7 +7,7 @@ using Serialization.MessagePack;
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// Extensions to <see cref="MessageBuilder"/> to add <see cref="MessagePackSerializer"/>
+    /// Extensions to <see cref="MessagingBuilder"/> to add <see cref="MessagePackSerializer"/>
     /// </summary>
     public static class MessagePackMessagingBuilderExtensions
     {

@@ -5,6 +5,9 @@ namespace Messaging.Kafka
     /// <summary>
     /// The key-value pair of configurations for Apache Kafka
     /// </summary>
+    /// <remarks>
+    /// <see href="https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md"/>
+    /// </remarks>
     /// <inheritdoc />
     public class KafkaProperties : Dictionary<string, object>
     {

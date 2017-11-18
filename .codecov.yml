@@ -4,3 +4,4 @@ coverage:
     project:
       default:
         enabled: yes
+        target: 75%
