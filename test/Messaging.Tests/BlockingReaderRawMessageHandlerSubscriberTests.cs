@@ -14,7 +14,7 @@ namespace Messaging.Tests
     public class BlockingReaderRawMessageHandlerSubscriberTests
     {
         [Theory, AutoSubstituteData]
-        public async Task Subscribe_CallbackRethrows_UnsubscribeDoesNotFailAwait(
+        public async Task Subscribe_CallbackNull_DoesntThrow(
             string topic,
             IDisposableBlockingRawMessageReader<IPollingOptions> reader,
             [Frozen] IPollingOptions options,
@@ -22,8 +22,26 @@ namespace Messaging.Tests
             BlockingReaderRawMessageHandlerSubscriber<IPollingOptions> sut)
         {
             // Arrange
-            options.ReaderStoppingCallback = (s, handler, ex) => throw ex;
+            options.ReaderStoppingCallback = null;
+            options.ErrorCallback = null;
             reader.TryGetMessage(out var _, options).Throws<DivideByZeroException>();
+
+            // Act
+            await sut.Subscribe(topic, rawMessageHandler, None);
+            // await doesn't throw on OperationCancelledException
+            await sut.Unsubscribe(topic, rawMessageHandler, None);
+        }
+
+
+        [Theory, AutoSubstituteData]
+        public async Task Subscribe_CallbackRethrows_UnsubscribeDoesNotFailAwait(
+            string topic,
+            [Frozen] IPollingOptions options,
+            [Frozen] IRawMessageHandler rawMessageHandler,
+            BlockingReaderRawMessageHandlerSubscriber<IPollingOptions> sut)
+        {
+            // Arrange
+            options.ReaderStoppingCallback = (s, handler, ex) => throw ex;
 
             // Act
             await sut.Subscribe(topic, rawMessageHandler, None);

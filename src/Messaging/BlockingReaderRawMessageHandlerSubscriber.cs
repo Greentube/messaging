@@ -176,11 +176,11 @@ namespace Messaging
             }
             catch (OperationCanceledException oce)
             {
-                options?.ReaderStoppingCallback(topic, rawHandler, oce);
+                options.ReaderStoppingCallback?.Invoke(topic, rawHandler, oce);
             }
             catch (Exception ex)
             {
-                options?.ErrorCallback(topic, rawHandler, ex);
+                options.ErrorCallback?.Invoke(topic, rawHandler, ex);
             }
             finally
             {
