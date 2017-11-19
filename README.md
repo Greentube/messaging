@@ -50,13 +50,11 @@ public class SomeMessageController
         return Accepted();
     }
 }
-
-
 ```
 
 #### Highlights
 
-* Supports multiple serialization types and messaging middlewares.
+* Supports multiple serialization formats and messaging middlewares.
 * Message handlers automatically discovered, registered
 * Handlers are resolved through DI with configurable lifetimes
 * Handler invocation done with [Expression trees](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/expression-trees/)
@@ -69,7 +67,7 @@ The current supported messaging systems are:
 * [Apache Kafka](https://kafka.apache.org/)
 
 #### Serialization
-The supported serialization methods are:
+The supported serialization formats are:
 
 * MessagePack - with [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp)
 * ProtoBuf - with [protobuf-net](https://github.com/mgravell/protobuf-net)
@@ -92,51 +90,7 @@ services.AddMessaging(builder =>
 });
 ```
 
-Each implementation has some additional settings
-
-##### MessagePack
-
-Define a custom IFormatterResolver and compressiong LZ4:
-
-```csharp
-
-builder.AddMessagePack(o => {
-    // Don't require attributes on model
-    o.FormatterResolver = global::MessagePack.Resolvers.ContractlessStandardResolver.Instance;
-    // Use LZ4 compression
-    o.UseLz4Compression = true;
-});
-```
-
-##### ProtoBuf
-
-Custom RuntimeTypeModel
-```csharp
-var model = RuntimeTypeModel.Create();
-model.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
-builder.AddProtoBuf(o => o.RuntimeTypeModel = runtimeTypeModel);
-```
-
-##### JSON
-
-Define the encoding.
-
-```csharp
-// Use UTF-16 instead of the default UTF-8
-builder.AddJson(o => o.Encoding = Encoding.Unicode);
-```
-
-##### XML
-
-Xml with user-defined default namespace
-```csharp
-builder.AddXml(p => p.DefaultNamespace = "some-namespace");
-```
-Xml with user-defined factory delegate
-```csharp 
-// Root attribute will be named: 'messaging'
-builder.AddXml(p => p.Factory = type => new XmlSerializer(type, new XmlRootAttribute("messaging")));
-```
+Each implementation has some additional settings. For more information on serialization, please refer the [Greentube.Serialization](https://github.com/Greentube/serialization) repository.
 
 #### Discovering and Invoking handlers
 
