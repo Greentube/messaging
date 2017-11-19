@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>0.0.0</PackageVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Coverage|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Greentube.Messaging\Greentube.Messaging.csproj" />
+    <ProjectReference Include="..\Greentube.Messaging.Redis\Greentube.Messaging.Redis.csproj" />
+    <ProjectReference Include="..\Greentube.Messaging.Kafka\Greentube.Messaging.Kafka.csproj" />
+    <ProjectReference Include="..\Greentube.Messaging.DependencyInjection\Greentube.Messaging.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Greentube.Messaging.DependencyInjection.Redis\Greentube.Messaging.DependencyInjection.Redis.csproj" />
+    <ProjectReference Include="..\Greentube.Messaging.DependencyInjection.Kafka\Greentube.Messaging.DependencyInjection.Kafka.csproj" />
+    <ProjectReference Include="..\Greentube.Serialization\Greentube.Serialization.csproj" />
+    <ProjectReference Include="..\Greentube.Serialization.Json\Greentube.Serialization.Json.csproj" />
+    <ProjectReference Include="..\Greentube.Serialization.ProtoBuf\Greentube.Serialization.ProtoBuf.csproj" />
+    <ProjectReference Include="..\Greentube.Serialization.Xml\Greentube.Serialization.Xml.csproj" />
+    <ProjectReference Include="..\Greentube.Serialization.MessagePack\Greentube.Serialization.MessagePack.csproj" />
+    <ProjectReference Include="..\Greentube.Messaging.DependencyInjection.Serialization.ProtoBuf\Greentube.Messaging.DependencyInjection.Serialization.ProtoBuf.csproj" />
+    <ProjectReference Include="..\Greentube.Messaging.DependencyInjection.Serialization.Json\Greentube.Messaging.DependencyInjection.Serialization.Json.csproj" />
+    <ProjectReference Include="..\Greentube.Messaging.DependencyInjection.Serialization.Xml\Greentube.Messaging.DependencyInjection.Serialization.Xml.csproj" />
+    <ProjectReference Include="..\Greentube.Messaging.DependencyInjection.Serialization.MessagePack\Greentube.Messaging.DependencyInjection.Serialization.MessagePack.csproj" />
+  </ItemGroup>
+</Project>

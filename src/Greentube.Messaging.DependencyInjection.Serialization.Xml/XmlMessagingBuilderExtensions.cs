@@ -1,0 +1,24 @@
+﻿using System;
+using Greentube.Messaging.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Greentube.Serialization.Xml;
+
+// ReSharper disable once CheckNamespace - Discoverability
+namespace Microsoft.Extensions.DependencyInjection
+{
+    public static class XmlMessagingBuilderExtensions
+    {
+        public static MessagingBuilder AddXml(this MessagingBuilder builder)
+        {
+            builder.AddSerializer<XmlSerializer>();
+            builder.Services.AddSingleton(c => c.GetRequiredService<IOptions<XmlOptions>>().Value);
+            return builder;
+        }
+
+        public static MessagingBuilder AddXml(this MessagingBuilder builder, Action<XmlOptions> setupAction)
+        {
+            builder.Services.Configure(setupAction);
+            return builder.AddXml();
+        }
+    }
+}

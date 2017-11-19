@@ -1,4 +1,4 @@
-# messaging [![Build Status](https://travis-ci.org/bruno-garcia/messaging.svg?branch=master)](https://travis-ci.org/bruno-garcia/messaging) [![Build status](https://ci.appveyor.com/api/projects/status/diurhycgpanx342t/branch/master?svg=true)](https://ci.appveyor.com/project/bruno-garcia/messaging) [![codecov](https://codecov.io/gh/bruno-garcia/messaging/branch/master/graph/badge.svg)](https://codecov.io/gh/bruno-garcia/messaging)
+# messaging [![Build Status](https://travis-ci.org/Greentube/messaging.svg?branch=master)](https://travis-ci.org/Greentube/messaging) [![Build status](https://ci.appveyor.com/api/projects/status/a3pstjg357fn8it9/branch/master?svg=true)](https://ci.appveyor.com/project/Greentube/messaging) [![codecov](https://codecov.io/gh/Greentube/messaging/branch/master/graph/badge.svg)](https://codecov.io/gh/Greentube/messaging)
 
 An opinionated messaging library for simple pub/sub with different serialization and message broker/middleware.
 

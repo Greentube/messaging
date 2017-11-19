@@ -32,7 +32,7 @@ Get-ChildItem -Filter .\test\ |
           -hideskipped:File `
           -output:$coverageFile `
           -oldStyle `
-          -filter:"+[$projectName]* -[$testProjectName]* -[Messaging]*Attribute -[xunit*]*" `
+          -filter:"+[$projectName]* -[$testProjectName]* -[Greentube.Messaging]*Attribute -[xunit*]*" `
           -searchdirs:"$csprojPath\bin\$configuration\netcoreapp2.0\" `
           -register:user
     }

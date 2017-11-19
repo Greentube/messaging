@@ -1,5 +1,7 @@
-.idea
+.idea/
 .vs/
+.vscode/
+*.user
 bin/
 obj/
 coverage/
