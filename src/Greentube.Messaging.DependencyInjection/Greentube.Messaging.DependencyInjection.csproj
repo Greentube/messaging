@@ -2,17 +2,23 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageVersion>0.0.0</PackageVersion>
+    <Authors>Bruno Garcia</Authors>
+    <Owners>Bruno Garcia; Greentube</Owners>
+    <Description>Extensions to configure Greentube.Messaging via Microsoft.Extensions.DependencyInjection.</Description>
+    <PackageProjectUrl>https://github.com/Greentube/messaging</PackageProjectUrl>
+    <PackageTags>dependency-injection;messaging;pubsub;publish-subscribe</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Coverage|AnyCPU'">
     <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Greentube.Serialization.DependencyInjection" Version="1.0.0-alpha2" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
     <PackageReference Include="Scrutor" Version="2.1.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Greentube.Messaging\Greentube.Messaging.csproj" />
-    <ProjectReference Include="..\Greentube.Serialization\Greentube.Serialization.csproj" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Greentube.Serialization;
+using Greentube.Serialization.DependencyInjection;
 
 namespace Greentube.Messaging.DependencyInjection
 {
@@ -24,10 +25,9 @@ namespace Greentube.Messaging.DependencyInjection
             return this;
         }
 
-        public MessagingBuilder AddSerializer<TSerializer>(ServiceLifetime lifetime = ServiceLifetime.Singleton)
-            where TSerializer : ISerializer
+        public MessagingBuilder AddSerialization(Action<SerializationBuilder> builderAction)
         {
-            Services.Add(ServiceDescriptor.Describe(typeof(ISerializer), typeof(TSerializer), lifetime));
+            Services.AddSerialization(builderAction);
             return this;
         }
 
@@ -102,7 +102,7 @@ namespace Greentube.Messaging.DependencyInjection
         private (bool supportPublishing, bool supportHandling) VerifyMessagingSupport()
         {
             var serializers = Services.Count(s => s.ServiceType == typeof(ISerializer));
-            if (serializers == 0) throw new InvalidOperationException($"No serializer has been configured. Call builder.{nameof(AddSerializer)}");
+            if (serializers == 0) throw new InvalidOperationException($"No serializer has been configured. Call builder.{nameof(AddSerialization)}");
             if (serializers > 1) throw new InvalidOperationException("More than one serializer has been configured. Please define a single one.");
 
             var rawPublishers = Services.Count(s => s.ServiceType == typeof(IRawMessagePublisher));

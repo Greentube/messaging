@@ -1,12 +1,17 @@
-configuration: Release
+version: '1.0.0-alpha-{build}'
 init:
   - git config --global core.autocrlf true
+  # If there's a tag, use that as the version.
+  - ps: >-
+      if($env:APPVEYOR_REPO_TAG -eq "true"){Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"}
 # Will build dependencies in release (optimize and portable pdbs) mode:
 build_script:
   - cmd: for /f %%a in ('dir /b test') do dotnet test -c Release test/%%a/%%a.csproj
 after_build:
 # packing the current Release build of all projects under src/
-  - cmd: for /f %%a in ('dir /b src') do dotnet pack --no-build -c Release src/%%a/%%a.csproj
+  - cmd: for /f %%a in ('dir /b src ^| find /v "Greentube.Messaging.All"') do dotnet pack --no-build -c Release src/%%a/%%a.csproj
+# pack the metapackage which is based on nuspec
+  - cmd: nuget pack -version %APPVEYOR_BUILD_VERSION% src\Greentube.Messaging.All\Greentube.Messaging.All.nuspec
 # Will build in Coverage mode (full pdbs) and upload coverage to Codecov
 on_success:
   - ps: .\coverage.ps1 -UploadCodecov
@@ -15,7 +20,6 @@ environment:
     DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
     DOTNET_CLI_TELEMETRY_OPTOUT: 1
 test: off
-deploy: off
 os: Visual Studio 2017
 dotnet_csproj:
   patch: true
@@ -25,3 +29,13 @@ dotnet_csproj:
 artifacts:
 - path: '**\*.nupkg'
   name: messaging-nuget-packages
+# builds on tags will publish all nupkgs to GitHub as a Draft release
+deploy:
+  release: $(appveyor_build_version)
+  provider: GitHub
+  auth_token:
+    secure: DsKyNX5x7EJOCaRUpZu17qwOfpd/NWaZzmQd0aE62nBAGkqI3nASvvHfvoQTjL8y
+  artifact: /.*\.nupkg/
+  draft: true
+  on:
+    appveyor_repo_tag: true

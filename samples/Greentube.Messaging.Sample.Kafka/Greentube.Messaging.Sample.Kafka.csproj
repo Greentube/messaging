@@ -5,8 +5,10 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Greentube.Messaging.Sample\Greentube.Messaging.Sample.csproj" />
+    <ProjectReference Include="..\..\src\Greentube.Messaging.DependencyInjection.Kafka\Greentube.Messaging.DependencyInjection.Kafka.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="0.11.2" />
+    <PackageReference Include="Greentube.Serialization.DependencyInjection.ProtoBuf" Version="1.0.0-alpha2" />
   </ItemGroup>
 </Project>

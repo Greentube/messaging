@@ -4,9 +4,16 @@ An opinionated messaging library for simple pub/sub with different serialization
 
 To use this library, you need to decide on which [serialization](#serialization) and [messaging middleware](#messaging-middleware) to use.
 
-### Publishing and Handling a message on an ASP.NET Core application
-```csharp
+## Samples
 
+This repository includes two samples:
+
+* [Redis with Json serialization](https://github.com/bruno-garcia/messaging/tree/master/samples/Greentube.Messaging.Sample.Redis)
+* [Kafka with ProtoBuf serialization](https://github.com/bruno-garcia/messaging/tree/master/samples/Greentube.Messaging.Sample.Kafka)
+
+## Example publishing and handling a message on an ASP.NET Core application
+
+```csharp
 // Class without annotations
 public class SomeMessage
 {
@@ -27,9 +34,9 @@ public class SomeMessageHandler : IMessageHandler<SomeMessage>
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddMessaging(builder => builder
-        .AddProtoBuf()
         .AddRedis()
-        .AddTopic<SomeMessage>("some.topic"));
+        .AddSerialization(b => b.AddProtoBuf())
+        .AddTopic<SomeMessage>("some.topic"))
 }
 public void Configure(IApplicationBuilder app)
 {
@@ -50,26 +57,26 @@ public class SomeMessageController
         return Accepted();
     }
 }
-
-
 ```
 
-#### Highlights
+## Highlights
 
-* Supports multiple serialization types and messaging middlewares.
+* Supports multiple serialization formats and messaging middlewares.
 * Message handlers automatically discovered, registered
 * Handlers are resolved through DI with configurable lifetimes
 * Handler invocation done with [Expression trees](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/expression-trees/)
 * Doesn't require implementing any interfaces or declaring attributes
 
-#### Messaging middleware
+## Messaging middleware
+
 The current supported messaging systems are:
 
 * [Redis](https://redis.io/topics/pubsub)
 * [Apache Kafka](https://kafka.apache.org/)
 
-#### Serialization
-The supported serialization methods are:
+## Serialization
+
+The supported serialization formats are:
 
 * MessagePack - with [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp)
 * ProtoBuf - with [protobuf-net](https://github.com/mgravell/protobuf-net)
@@ -81,64 +88,23 @@ Example serialization setup:
 
 ```csharp
 services.AddMessaging(builder =>
-{
-    builder.AddMessagePack();
-    // or
-    builder.AddProtoBuf();
-    // or
-    builder.AddJson();
-    // or
-    builder.AddXml();
-});
+    builder.AddSerialization(s =>
+    {
+        s.AddMessagePack();
+        // or
+        s.AddProtoBuf();
+        // or
+        s.AddJson();
+        // or
+        s.AddXml();
+    })
 ```
 
-Each implementation has some additional settings
+Each implementation has some additional settings.
 
-##### MessagePack
+**For more information on serialization, please refer the [Greentube.Serialization](https://github.com/Greentube/serialization) repository.**
 
-Define a custom IFormatterResolver and compressiong LZ4:
-
-```csharp
-
-builder.AddMessagePack(o => {
-    // Don't require attributes on model
-    o.FormatterResolver = global::MessagePack.Resolvers.ContractlessStandardResolver.Instance;
-    // Use LZ4 compression
-    o.UseLz4Compression = true;
-});
-```
-
-##### ProtoBuf
-
-Custom RuntimeTypeModel
-```csharp
-var model = RuntimeTypeModel.Create();
-model.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
-builder.AddProtoBuf(o => o.RuntimeTypeModel = runtimeTypeModel);
-```
-
-##### JSON
-
-Define the encoding.
-
-```csharp
-// Use UTF-16 instead of the default UTF-8
-builder.AddJson(o => o.Encoding = Encoding.Unicode);
-```
-
-##### XML
-
-Xml with user-defined default namespace
-```csharp
-builder.AddXml(p => p.DefaultNamespace = "some-namespace");
-```
-Xml with user-defined factory delegate
-```csharp 
-// Root attribute will be named: 'messaging'
-builder.AddXml(p => p.Factory = type => new XmlSerializer(type, new XmlRootAttribute("messaging")));
-```
-
-#### Discovering and Invoking handlers
+## Discovering and Invoking handlers
 
 By default. Implementations of `IMessageHandler<T>` are discovered and registered dynamically. 
 When classes are in assemblies other than the entry assembly or the assemblies where `TMessage` is defined, 
@@ -152,6 +118,7 @@ for a message handler. Something like: `provider.GetService<IMessageHandler<T>>(
 It's advisable you switch to Singleton lifetime in case your handlers are thread-safe.
 
 The characteristics mentioned above can be customized with:
+
 ```csharp
 builder.AddHandlerDiscovery(d =>
     {
@@ -159,13 +126,13 @@ builder.AddHandlerDiscovery(d =>
         d.DiscoveredHandlersLifetime = ServiceLifetime.Singleton;
         d.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
     });
-``` 
+```
 
-#### Features planned:
+## Features planned
 
 * Add Message to Topic name map via Attributes
 
-#### Limitations
+## Limitations
 
 Currently it only supports a single Handler per Message type. You can easily work around it by implementing some
 composite pattern on your Handler by dispatching a call to multiple, pontentially in multiple threads, etc.

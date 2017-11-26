@@ -3,6 +3,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Greentube.Messaging.All\Greentube.Messaging.All.csproj" />
+    <ProjectReference Include="..\..\src\Greentube.Messaging.DependencyInjection\Greentube.Messaging.DependencyInjection.csproj" />
   </ItemGroup>
 </Project>
