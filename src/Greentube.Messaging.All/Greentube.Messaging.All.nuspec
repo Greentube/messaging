@@ -1,0 +1,22 @@
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Greentube.Messaging.All</id>
+    <version>$version$</version>
+    <authors>Bruno Garcia</authors>
+    <owners>Bruno Garcia</owners>
+    <summary>Metapackage which includes all Greentube Messaging packages.</summary>
+    <projectUrl>https://github.com/Greentube/serialization</projectUrl>
+    <description>Metapackage which includes all Greentube Messaging packages.</description>
+    <tags>messaging;pubsub;publish-subscribe;redis;kafka</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Greentube.Messaging" version="$version$" />
+        <dependency id="Greentube.Messaging.Kafka" version="$version$" />
+        <dependency id="Greentube.Messaging.Redis" version="$version$" />
+        <dependency id="Greentube.Messaging.DependencyInjection" version="$version$" />
+        <dependency id="Greentube.Messaging.DependencyInjection.Kafka" version="$version$" />
+        <dependency id="Greentube.Messaging.DependencyInjection.Redis" version="$version$" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
