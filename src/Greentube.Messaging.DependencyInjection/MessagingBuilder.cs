@@ -25,10 +25,10 @@ namespace Greentube.Messaging.DependencyInjection
             return this;
         }
 
-        public SerializationBuilder AddSerialization(Action<SerializationBuilder> builderAction = null)
+        public MessagingBuilder AddSerialization(Action<SerializationBuilder> builderAction)
         {
-            return Services.AddSerialization(builderAction ?? NoOpAction);
-            void NoOpAction(SerializationBuilder _) { }
+            Services.AddSerialization(builderAction);
+            return this;
         }
 
         public MessagingBuilder AddRawMessagePublisher<TRawMessagePublisher>(ServiceLifetime lifetime = ServiceLifetime.Singleton)

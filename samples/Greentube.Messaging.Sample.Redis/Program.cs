@@ -10,9 +10,8 @@ namespace Greentube.Messaging.Sample.Redis
             using (var app = new SomeApp(s => s
                 .AddMessaging(builder => builder
                         .AddRedis()
-                        .AddTopic<SomeMessage>("topic")
-                        .AddSerialization()
-                            .AddJson())
+                        .AddSerialization(b => b.AddJson())
+                        .AddTopic<SomeMessage>("topic"))
                 .AddSingleton<IConnectionMultiplexer>(
                         ConnectionMultiplexer.Connect("localhost:6379"))))
             {

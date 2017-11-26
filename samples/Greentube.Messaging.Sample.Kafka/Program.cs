@@ -13,6 +13,7 @@ namespace Greentube.Messaging.Sample.Kafka
                 s.AddMessaging(builder => builder
                     .AddTopic<SomeMessage>("some.topic")
                     .AddTopic<SomeOtherMessage>("some.topic.other")
+                    .AddSerialization(b => b.AddProtoBuf())
                     .AddKafka(o =>
                     {
                         o.Properties.BrokerList = "localhost:9092";
@@ -29,8 +30,7 @@ namespace Greentube.Messaging.Sample.Kafka
                         d.DiscoveredHandlersLifetime = ServiceLifetime.Singleton;
                         d.MessageHandlerAssemblies.Add(typeof(SomeMessage).Assembly);
                     })
-                    .AddSerialization()
-                        .AddProtoBuf())))
+                    )))
             {
                 // Adds proto definition to the type (another option is to add [ProtoContract] to the class directly)
                 RuntimeTypeModel.Default.Add(typeof(SomeMessage), false).Add(1, nameof(SomeMessage.Body));
@@ -39,7 +39,7 @@ namespace Greentube.Messaging.Sample.Kafka
                 var publisher = app.Run();
                 for (int i = 0; i < 3; i++)
                 {
-                    publisher.Publish(new SomeOtherMessage {Number = i}, CancellationToken.None);
+                    publisher.Publish(new SomeOtherMessage { Number = i }, CancellationToken.None);
                 }
             } // Graceful shutdown
         }
