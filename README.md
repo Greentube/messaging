@@ -4,10 +4,16 @@ An opinionated messaging library for simple pub/sub with different serialization
 
 To use this library, you need to decide on which [serialization](#serialization) and [messaging middleware](#messaging-middleware) to use.
 
-## Publishing and Handling a message on an ASP.NET Core application
+## Samples
+
+This repository includes two samples:
+
+* [Redis with Json serialization](https://github.com/bruno-garcia/messaging/tree/master/samples/Greentube.Messaging.Sample.Redis)
+* [Kafka with ProtoBuf serialization](https://github.com/bruno-garcia/messaging/tree/master/samples/Greentube.Messaging.Sample.Kafka)
+
+## Example publishing and hHandling a message on an ASP.NET Core application
 
 ```csharp
-
 // Class without annotations
 public class SomeMessage
 {
