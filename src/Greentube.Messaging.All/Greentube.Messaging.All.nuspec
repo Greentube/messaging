@@ -5,7 +5,7 @@
     <authors>Bruno Garcia</authors>
     <owners>Bruno Garcia</owners>
     <summary>Metapackage which includes all Greentube Messaging packages.</summary>
-    <projectUrl>https://github.com/Greentube/serialization</projectUrl>
+    <projectUrl>https://github.com/Greentube/messaging</projectUrl>
     <description>Metapackage which includes all Greentube Messaging packages.</description>
     <tags>messaging;pubsub;publish-subscribe;redis;kafka</tags>
     <dependencies>

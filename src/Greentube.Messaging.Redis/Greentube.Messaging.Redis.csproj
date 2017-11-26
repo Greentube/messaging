@@ -2,6 +2,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.5</TargetFramework>
     <PackageVersion>0.0.0</PackageVersion>
+    <Authors>Bruno Garcia</Authors>
+    <Owners>Bruno Garcia; Greentube</Owners>
+    <Description>Redis implementation of Greentube.Messaging.</Description>
+    <PackageProjectUrl>https://github.com/Greentube/messaging</PackageProjectUrl>
+    <PackageTags>redis;messaging;pubsub;publish-subscribe</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Coverage|AnyCPU'">
     <DebugType>full</DebugType>
