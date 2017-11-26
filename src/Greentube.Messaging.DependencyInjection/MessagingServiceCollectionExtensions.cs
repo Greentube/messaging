@@ -13,8 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builderAction">Action to handle the messaging builder</param>
         /// <returns>ServicesCollection</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static ServiceCollection AddMessaging(
-            this ServiceCollection services,
+        public static IServiceCollection AddMessaging(
+            this IServiceCollection services,
             Action<MessagingBuilder> builderAction)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));

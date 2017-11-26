@@ -8,7 +8,7 @@ namespace Greentube.Messaging.Sample
     {
         private readonly ServiceProvider _serviceProvider;
 
-        public SomeApp(Action<ServiceCollection> servicesAction)
+        public SomeApp(Action<IServiceCollection> servicesAction)
         {
             // ConfigureServices()
             var services = new ServiceCollection();
