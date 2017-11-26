@@ -48,14 +48,12 @@ public void Configure(IApplicationBuilder app)
 public class SomeMessageController
 {
     private readonly IMessagePublisher _publisher;
-    public SomeMessageController(IMessagePublisher publisher) => _publisher;
+    public SomeMessageController(IMessagePublisher publisher)
+        => _publisher = publisher;
 
     [HttpPut]
-    public async Task<IActionResult> PublishSomeMessage([FromBody] SomeMessage message, CancellationToken token)
-    {
-        await _publisher.Publish(message, token);
-        return Accepted();
-    }
+    public Task PublishSomeMessage([FromBody] SomeMessage message, CancellationToken token)
+        => _publisher.Publish(message, token);
 }
 ```
 
