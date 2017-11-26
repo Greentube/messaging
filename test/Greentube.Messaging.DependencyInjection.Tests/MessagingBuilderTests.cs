@@ -189,8 +189,9 @@ namespace Greentube.Messaging.DependencyInjection.Tests
         public void Build_NeitherPublisherNorSubscriber_ThrowsInvalidOperation()
         {
             var builder = _fixture.GetBuilder();
-            builder.AddSerializer<ISerializer>()
-                .AddTopic<MessagingBuilderTests>(nameof(MessagingBuilderTests));
+            builder
+                .AddTopic<MessagingBuilderTests>(nameof(MessagingBuilderTests))
+                .AddSerialization(b => b.AddSerializer<ISerializer>(ServiceLifetime.Singleton));
 
             Assert.Throws<InvalidOperationException>(() => builder.Build());
         }
@@ -200,9 +201,10 @@ namespace Greentube.Messaging.DependencyInjection.Tests
         {
             var builder = _fixture.GetBuilder();
 
-            builder.AddSerializer<ISerializer>()
+            builder
                 .AddRawMessageHandlerSubscriber<IRawMessageHandlerSubscriber>()
-                .AddRawMessagePublisher<IRawMessagePublisher>();
+                .AddRawMessagePublisher<IRawMessagePublisher>()
+                .AddSerialization(b => b.AddSerializer<ISerializer>(ServiceLifetime.Singleton));
 
             Assert.Throws<InvalidOperationException>(() => builder.Build());
         }
@@ -223,7 +225,7 @@ namespace Greentube.Messaging.DependencyInjection.Tests
             ValidBuilderSetup(builder);
 
             // Act: Second Serializer
-            builder.AddSerializer<ISerializer>();
+            builder.AddSerialization(b => b.AddSerializer<ISerializer>(ServiceLifetime.Singleton));
 
             // Assert
             Assert.Throws<InvalidOperationException>(() => builder.Build());
@@ -265,10 +267,11 @@ namespace Greentube.Messaging.DependencyInjection.Tests
 
         private static void ValidBuilderSetup(MessagingBuilder builder)
         {
-            builder.AddSerializer<ISerializer>()
+            builder
                 .AddRawMessageHandlerSubscriber<IRawMessageHandlerSubscriber>()
                 .AddRawMessagePublisher<IRawMessagePublisher>()
-                .AddTopic<MessagingBuilderTests>(nameof(MessagingBuilderTests));
+                .AddTopic<MessagingBuilderTests>(nameof(MessagingBuilderTests))
+                .AddSerialization(b => b.AddSerializer<ISerializer>(ServiceLifetime.Singleton));
         }
 
         // ReSharper disable once ParameterOnlyUsedForPreconditionCheck.Local

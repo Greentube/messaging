@@ -20,8 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greentube.Messaging", "src\Greentube.Messaging\Greentube.Messaging.csproj", "{B6BCB723-BCCD-4AB0-8947-28203FA4A76B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greentube.Messaging.All", "src\Greentube.Messaging.All\Greentube.Messaging.All.csproj", "{6D64E53E-D0B4-461D-8272-6B1A6004C2EA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greentube.Messaging.DependencyInjection", "src\Greentube.Messaging.DependencyInjection\Greentube.Messaging.DependencyInjection.csproj", "{C06FAF2A-0741-4D66-AC44-B6DA022436B3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Greentube.Messaging.DependencyInjection.Kafka", "src\Greentube.Messaging.DependencyInjection.Kafka\Greentube.Messaging.DependencyInjection.Kafka.csproj", "{293B140B-060A-437A-A0E5-8470958DB094}"
@@ -64,10 +62,6 @@ Global
 		{B6BCB723-BCCD-4AB0-8947-28203FA4A76B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6BCB723-BCCD-4AB0-8947-28203FA4A76B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6BCB723-BCCD-4AB0-8947-28203FA4A76B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D64E53E-D0B4-461D-8272-6B1A6004C2EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D64E53E-D0B4-461D-8272-6B1A6004C2EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D64E53E-D0B4-461D-8272-6B1A6004C2EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D64E53E-D0B4-461D-8272-6B1A6004C2EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C06FAF2A-0741-4D66-AC44-B6DA022436B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C06FAF2A-0741-4D66-AC44-B6DA022436B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C06FAF2A-0741-4D66-AC44-B6DA022436B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -134,7 +128,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B6BCB723-BCCD-4AB0-8947-28203FA4A76B} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
-		{6D64E53E-D0B4-461D-8272-6B1A6004C2EA} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{C06FAF2A-0741-4D66-AC44-B6DA022436B3} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{293B140B-060A-437A-A0E5-8470958DB094} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}
 		{9256485D-ACE3-4B8B-B542-A320D18D1B54} = {FD29A32D-EE38-4C99-B172-8F830AEE3E07}

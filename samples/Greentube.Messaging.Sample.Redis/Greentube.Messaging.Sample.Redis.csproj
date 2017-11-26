@@ -4,6 +4,10 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Greentube.Serialization.DependencyInjection.Json" Version="1.0.0-alpha2" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Greentube.Messaging.Sample\Greentube.Messaging.Sample.csproj" />
+    <ProjectReference Include="..\..\src\Greentube.Messaging.DependencyInjection.Redis\Greentube.Messaging.DependencyInjection.Redis.csproj" />
   </ItemGroup>
 </Project>

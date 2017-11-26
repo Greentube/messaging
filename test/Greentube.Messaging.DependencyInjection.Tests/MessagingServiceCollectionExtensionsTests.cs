@@ -37,7 +37,7 @@ namespace Greentube.Messaging.DependencyInjection.Tests
             // Act
             s.AddMessaging(builder =>
             {
-                builder.AddSerializer<ISerializer>();
+                builder.AddSerialization(b => b.AddSerializer<ISerializer>(ServiceLifetime.Singleton));
                 builder.AddRawMessageHandlerSubscriber<IRawMessageHandlerSubscriber>();
                 builder.AddRawMessagePublisher<IRawMessagePublisher>();
                 builder.AddTopic<MessagingServiceCollectionExtensionsTests>(
