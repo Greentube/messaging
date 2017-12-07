@@ -8,8 +8,8 @@ To use this library, you need to decide on which [serialization](#serialization)
 
 This repository includes two samples:
 
-* [Redis with Json serialization](https://github.com/bruno-garcia/messaging/tree/master/samples/Greentube.Messaging.Sample.Redis)
-* [Kafka with ProtoBuf serialization](https://github.com/bruno-garcia/messaging/tree/master/samples/Greentube.Messaging.Sample.Kafka)
+* [Redis with Json serialization](https://github.com/Greentube/messaging/tree/master/samples/Greentube.Messaging.Sample.Redis)
+* [Kafka with ProtoBuf serialization](https://github.com/Greentube/messaging/tree/master/samples/Greentube.Messaging.Sample.Kafka)
 
 ## Example publishing and handling a message on an ASP.NET Core application
 
