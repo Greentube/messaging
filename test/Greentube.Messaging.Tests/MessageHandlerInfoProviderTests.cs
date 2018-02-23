@@ -37,15 +37,6 @@ namespace Greentube.Messaging.Tests
         }
 
         [Fact]
-        public void Constructor_EmptyTypeTopicMap_ThrowsArgumentException()
-        {
-            var emptyMap = new MessageTypeTopicMap();
-
-            var ex = Assert.Throws<ArgumentException>(() => new MessageHandlerInfoProvider(emptyMap));
-            Assert.Equal($"{nameof(IMessageTypeTopicMap)} is empty.", ex.Message);
-        }
-
-        [Fact]
         public void Constructor_NullMessageTypeTopicMap_ThrowsNullArgument()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => new MessageHandlerInfoProvider(null));
