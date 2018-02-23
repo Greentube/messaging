@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using FastExpressionCompiler;
 
 namespace Greentube.Messaging
 {
@@ -21,12 +22,7 @@ namespace Greentube.Messaging
         /// </summary>
         /// <param name="typeTopicMap">A map between Topic names and Message types</param>
         public MessageHandlerInfoProvider(IMessageTypeTopicMap typeTopicMap)
-        {
-            _typeTopicMap = typeTopicMap ?? throw new ArgumentNullException(nameof(typeTopicMap));
-
-            if (!_typeTopicMap.Any())
-                throw new ArgumentException($"{nameof(IMessageTypeTopicMap)} is empty.");
-        }
+            => _typeTopicMap = typeTopicMap ?? throw new ArgumentNullException(nameof(typeTopicMap));
 
         public IEnumerable<(
                 Type messageType,
@@ -54,7 +50,7 @@ namespace Greentube.Messaging
                     handlerInstance,
                     messageInstance,
                     tokenInstance)
-                    .Compile()
+                    .CompileFast()
                 select (messageType, handlerType, handleFunc);
         }
     }

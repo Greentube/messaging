@@ -15,5 +15,6 @@
   <ItemGroup>
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
     <PackageReference Include="Greentube.Serialization" Version="1.0.0-alpha2" />
+    <PackageReference Include="FastExpressionCompiler" Version="1.6.0" />
   </ItemGroup>
 </Project>

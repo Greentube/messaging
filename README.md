@@ -62,7 +62,7 @@ public class SomeMessageController
 * Supports multiple serialization formats and messaging middlewares.
 * Message handlers automatically discovered, registered
 * Handlers are resolved through DI with configurable lifetimes
-* Handler invocation done with [Expression trees](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/expression-trees/)
+* Handler invocation done with [Expression trees](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/expression-trees/) - [fast](https://github.com/dadhi/FastExpressionCompiler).
 * Doesn't require implementing any interfaces or declaring attributes
 
 ## Messaging middleware

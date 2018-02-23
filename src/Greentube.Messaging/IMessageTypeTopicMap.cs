@@ -7,19 +7,8 @@ namespace Greentube.Messaging
     /// Map of message type and correspondent topic
     /// </summary>
     /// <inheritdoc />
-    public interface IMessageTypeTopicMap : IReadOnlyCollection<KeyValuePair<Type, string>>
+    public interface IMessageTypeTopicMap
     {
-        /// <summary>
-        /// Add a map of message type and topic
-        /// </summary>
-        /// <param name="type">Type of message</param>
-        /// <param name="topic">Topic</param>
-        void Add(Type type, string topic);
-        /// <summary>
-        /// Remove a map by the message type
-        /// </summary>
-        /// <param name="type"></param>
-        void Remove(Type type);
         /// <summary>
         /// Get the topic of a corresponding message type
         /// </summary>

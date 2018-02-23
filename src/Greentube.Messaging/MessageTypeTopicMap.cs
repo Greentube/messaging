@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Greentube.Messaging
 {
     /// <inheritdoc cref="IMessageTypeTopicMap"/>
-    public class MessageTypeTopicMap : IMessageTypeTopicMap
+    public class MessageTypeTopicMap : IMessageTypeTopicMap, IReadOnlyCollection<KeyValuePair<Type, string>>
     {
         private readonly ConcurrentDictionary<Type, string> _messageTopicMap =
             new ConcurrentDictionary<Type, string>();
